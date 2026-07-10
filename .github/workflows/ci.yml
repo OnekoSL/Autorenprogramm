@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Build und Tests
+    runs-on: windows-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Rust stable einrichten
+        shell: pwsh
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+
+      - name: Abhaengigkeiten installieren
+        run: npm ci
+
+      - name: Versionen pruefen
+        run: npm run check:version
+
+      - name: Frontend bauen
+        run: npm run build
+
+      - name: Rust-Tests ausfuehren
+        run: cargo test --locked --manifest-path src-tauri/Cargo.toml

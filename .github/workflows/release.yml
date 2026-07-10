@@ -1,0 +1,70 @@
+name: Windows-Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Windows x64 NSIS
+    runs-on: windows-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Rust stable einrichten
+        shell: pwsh
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+
+      - name: Abhaengigkeiten installieren
+        run: npm ci
+
+      - name: Tag und Versionen pruefen
+        shell: pwsh
+        run: npm run check:version -- $env:GITHUB_REF_NAME
+
+      - name: Frontend bauen
+        run: npm run build
+
+      - name: Rust-Tests ausfuehren
+        run: cargo test --locked --manifest-path src-tauri/Cargo.toml
+
+      - name: NSIS-Installer bauen
+        run: npx tauri build --bundles nsis
+
+      - name: SHA-256-Datei erzeugen
+        shell: pwsh
+        run: |
+          $installers = @(Get-ChildItem "src-tauri/target/release/bundle/nsis/*-setup.exe")
+          if ($installers.Count -ne 1) { throw "Erwartete genau einen NSIS-Installer, gefunden: $($installers.Count)" }
+          $installer = $installers[0]
+          $checksum = "$($installer.FullName).sha256"
+          $hash = (Get-FileHash $installer.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          [IO.File]::WriteAllText($checksum, "$hash  $($installer.Name)`n")
+
+      - name: GitHub Pre-release veroeffentlichen
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $installers = @(Get-ChildItem "src-tauri/target/release/bundle/nsis/*-setup.exe")
+          if ($installers.Count -ne 1) { throw "Erwartete genau einen NSIS-Installer, gefunden: $($installers.Count)" }
+          $installer = $installers[0]
+          $checksum = "$($installer.FullName).sha256"
+          gh release create $env:GITHUB_REF_NAME $installer.FullName $checksum `
+            --verify-tag `
+            --prerelease `
+            --title "Autorenprogramm $env:GITHUB_REF_NAME – MVP-Testrelease" `
+            --notes-file RELEASE_NOTES.md

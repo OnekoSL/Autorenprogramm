@@ -1,0 +1,32 @@
+name: MVP-Feedback
+description: Rueckmeldung zu Bedienung, Schreibfluss oder Funktionsumfang
+title: "[Feedback] "
+labels: [feedback]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Bereich
+      options:
+        - Projekt und Navigation
+        - Szeneneditor
+        - Projektbibel
+        - Suche und Export
+        - Lokale KI
+        - Installation
+        - Sonstiges
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: Beobachtung
+      description: Was hat gut funktioniert oder den Schreibfluss behindert?
+    validations:
+      required: true
+  - type: textarea
+    id: improvement
+    attributes:
+      label: Gewuenschte Verbesserung
+    validations:
+      required: true

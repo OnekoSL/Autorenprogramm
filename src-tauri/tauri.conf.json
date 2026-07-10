@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Autorenprogramm",
+  "version": "0.1.0",
+  "identifier": "de.oneko.autorenprogramm",
+  "build": {
+    "beforeDevCommand": "npm.cmd run dev",
+    "devUrl": "http://localhost:5173",
+    "beforeBuildCommand": "npm.cmd run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Autorenprogramm",
+        "width": 1440,
+        "height": 900,
+        "minWidth": 1180,
+        "minHeight": 720
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src ipc: http://ipc.localhost; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "publisher": "OnekoSL",
+    "homepage": "https://github.com/OnekoSL/Autorenprogramm",
+    "copyright": "Copyright (c) 2026 OnekoSL. Alle Rechte vorbehalten.",
+    "licenseFile": "../LICENSE.md",
+    "category": "Productivity",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "nsis": {
+        "languages": ["German"],
+        "installMode": "currentUser"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+name: Fehlerbericht
+description: Einen reproduzierbaren Fehler im MVP melden
+title: "[Fehler] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Bitte keine vertraulichen Manuskript- oder Projektdaten eintragen.
+  - type: input
+    id: version
+    attributes:
+      label: App-Version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows-Version
+      placeholder: Windows 11 24H2 x64
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Schritte zum Reproduzieren
+      description: Welche Aktionen fuehren verlaesslich zum Fehler?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Erwartetes Ergebnis
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Tatsaechliches Ergebnis
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Zusaetzlicher Kontext
+      description: Ollama-/Modellname, anonymisierte Meldungen oder Screenshots
