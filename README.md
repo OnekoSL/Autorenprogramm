@@ -25,7 +25,7 @@ Ollama und Modelle sind nicht Bestandteil des Installers. Alle Funktionen ausser
 
 ## Installation
 
-1. Im neuesten [GitHub Release](https://github.com/OnekoSL/Autorenprogramm/releases/latest) `Autorenprogramm_0.1.0_x64-setup.exe` und die gleichnamige `.sha256`-Datei herunterladen.
+1. Im [GitHub Release v0.1.0](https://github.com/OnekoSL/Autorenprogramm/releases/tag/v0.1.0) `Autorenprogramm_0.1.0_x64-setup.exe` und die gleichnamige `.sha256`-Datei herunterladen.
 2. Optional die SHA-256-Pruefsumme in PowerShell vergleichen:
 
    ```powershell
