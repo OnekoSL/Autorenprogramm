@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { requireTauriRuntime } from "./tauri";
-
-export type ProjectBibleCardType = "character" | "location" | "item" | "note";
+export type ProjectBibleCardType = "character" | "location" | "item" | "note" | "faction" | "event";
+export type KnowledgeTargetType = ProjectBibleCardType | "world_system";
 export type NoteType = "general" | "research" | "lore" | "faction" | "event" | "todo";
 
 export interface ProjectBibleSnapshot {
@@ -9,7 +9,10 @@ export interface ProjectBibleSnapshot {
   locations: LocationSnapshot[];
   items: ItemSnapshot[];
   notes: NoteSnapshot[];
+  factions: FactionSnapshot[];
+  events: EventSnapshot[];
   sceneLinks: SceneLinkSnapshot[];
+  relationships: BibleRelationshipSnapshot[];
 }
 
 export interface CharacterSnapshot {
@@ -57,10 +60,16 @@ export interface NoteSnapshot {
   deletedAt?: string | null;
 }
 
+export interface FactionSnapshot { id: string; projectId: string; name: string; factionType: string; description: string; goals: string; notes: string; createdAt: string; updatedAt: string; deletedAt?: string | null; }
+export interface EventSnapshot { id: string; projectId: string; title: string; timeLabel: string; summary: string; outcome: string; notes: string; sortOrder: number; createdAt: string; updatedAt: string; deletedAt?: string | null; }
+export type BibleRelationshipType = "related" | "knows" | "family" | "allied" | "enemy" | "member_of" | "leads" | "owns" | "located_in" | "created_by" | "participates_in" | "caused" | "follows" | "uses_system" | "depends_on" | "affects" | "created_by_system";
+export interface BibleRelationshipSnapshot { id: string; sourceType: KnowledgeTargetType; sourceId: string; targetType: KnowledgeTargetType; targetId: string; relationshipType: BibleRelationshipType; description: string; createdAt: string; updatedAt: string; }
+export interface BibleRelationshipUpdate { id?: string; sourceType: KnowledgeTargetType; sourceId: string; targetType: KnowledgeTargetType; targetId: string; relationshipType: BibleRelationshipType; description: string; }
+
 export interface SceneLinkSnapshot {
   id: string;
   sceneId: string;
-  targetType: ProjectBibleCardType;
+  targetType: KnowledgeTargetType;
   targetId: string;
   relation: "assigned";
   sortOrder: number;
@@ -113,7 +122,7 @@ export function deleteProjectBibleCard(
 }
 
 export function getSceneLinksForCard(
-  targetType: ProjectBibleCardType,
+  targetType: KnowledgeTargetType,
   targetId: string,
 ): Promise<SceneLinkSnapshot[]> {
   requireTauriRuntime();
@@ -123,7 +132,7 @@ export function getSceneLinksForCard(
 }
 
 export function replaceSceneLinksForCard(
-  targetType: ProjectBibleCardType,
+  targetType: KnowledgeTargetType,
   targetId: string,
   sceneIds: string[],
 ): Promise<ProjectBibleSnapshot> {
@@ -132,3 +141,7 @@ export function replaceSceneLinksForCard(
     input: { targetType, targetId, sceneIds },
   });
 }
+
+export function upsertBibleRelationship(input: BibleRelationshipUpdate): Promise<ProjectBibleSnapshot> { requireTauriRuntime(); return invoke<ProjectBibleSnapshot>("upsert_bible_relationship", { input }); }
+export function deleteBibleRelationship(id: string): Promise<ProjectBibleSnapshot> { requireTauriRuntime(); return invoke<ProjectBibleSnapshot>("delete_bible_relationship", { input: { id } }); }
+export function reorderBibleEvents(eventIds: string[]): Promise<ProjectBibleSnapshot> { requireTauriRuntime(); return invoke<ProjectBibleSnapshot>("reorder_bible_events", { input: { eventIds } }); }

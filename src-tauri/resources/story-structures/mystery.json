@@ -1,0 +1,194 @@
+{
+    "formatVersion":  1,
+    "id":  "mystery",
+    "name":  "Ermittlungsstruktur",
+    "description":  "Genrespezifische Struktur für Rätsel, Spuren, Irrwege und Auflösung.",
+    "category":  "genre",
+    "tags":  [
+                 "krimi",
+                 "mysterium",
+                 "ermittlung"
+             ],
+    "acts":  [
+                 {
+                     "id":  "case",
+                     "title":  "Der Fall beginnt",
+                     "description":  "Rätsel, erster Eindruck und Ermittlungsrichtung werden etabliert.",
+                     "order":  0,
+                     "beats":  [
+                                   {
+                                       "id":  "crime",
+                                       "title":  "Verbrechen oder Rätsel",
+                                       "description":  "Ein ungeklaertes Ereignis erzeugt die zentrale Frage.",
+                                       "guidingQuestions":  [
+                                                                "Welche Frage muss beantwortet werden?",
+                                                                "Was steht für Betroffene auf dem Spiel?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  0,
+                                       "suggestedPercentageEnd":  8,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "first-impression",
+                                       "title":  "Erster Eindruck",
+                                       "description":  "Die sichtbare Lage legt eine vorläufige Deutung nahe.",
+                                       "guidingQuestions":  [
+                                                                "Was scheint offensichtlich?",
+                                                                "Welche Information fehlt?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  5,
+                                       "suggestedPercentageEnd":  12,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "first-clue",
+                                       "title":  "Erste Spur",
+                                       "description":  "Ein konkreter Hinweis eröffnet die aktive Ermittlung.",
+                                       "guidingQuestions":  [
+                                                                "Wohin führt die Spur scheinbar?",
+                                                                "Wer möchte sie entwerten?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  10,
+                                       "suggestedPercentageEnd":  18,
+                                       "order":  2
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "investigation",
+                     "title":  "Ermittlung und Irrwege",
+                     "description":  "Neue Hinweise erweitern den Fall und erzeugen falsche Sicherheit.",
+                     "order":  1,
+                     "beats":  [
+                                   {
+                                       "id":  "false-assumption",
+                                       "title":  "Falsche Annahme",
+                                       "description":  "Eine plausible Deutung lenkt die Ermittlung in die falsche Richtung.",
+                                       "guidingQuestions":  [
+                                                                "Warum ist die Annahme glaubhaft?",
+                                                                "Welches Detail widerspricht ihr bereits?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  18,
+                                       "suggestedPercentageEnd":  28,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "suspects",
+                                       "title":  "Neue Verdächtige",
+                                       "description":  "Motive und Gelegenheiten erweitern den Kreis möglicher Verantwortlicher.",
+                                       "guidingQuestions":  [
+                                                                "Wer profitiert vom Ereignis?",
+                                                                "Welche Geheimnisse sind nicht die gesuchte Loesung?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  25,
+                                       "suggestedPercentageEnd":  40,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "contradiction",
+                                       "title":  "Widerspruch",
+                                       "description":  "Eine Beobachtung passt nicht zur bevorzugten Theorie.",
+                                       "guidingQuestions":  [
+                                                                "Welche Fakten können nicht zugleich stimmen?",
+                                                                "Wer erkennt den Widerspruch?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  38,
+                                       "suggestedPercentageEnd":  48,
+                                       "order":  2
+                                   },
+                                   {
+                                       "id":  "central-reveal",
+                                       "title":  "Zentrale Enthüllung",
+                                       "description":  "Eine neue Wahrheit ordnet Spuren und Motive anders.",
+                                       "guidingQuestions":  [
+                                                                "Welche Spur bekommt eine neue Bedeutung?",
+                                                                "Welche Person rückt dadurch in den Mittelpunkt?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  48,
+                                       "suggestedPercentageEnd":  58,
+                                       "order":  3
+                                   },
+                                   {
+                                       "id":  "setback",
+                                       "title":  "Rückschlag",
+                                       "description":  "Beweise gehen verloren, ein Irrtum wird sichtbar oder die Gegenseite handelt.",
+                                       "guidingQuestions":  [
+                                                                "Was wird der Ermittlung entzogen?",
+                                                                "Welche persönliche Gefahr entsteht?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  58,
+                                       "suggestedPercentageEnd":  72,
+                                       "order":  4
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "solution",
+                     "title":  "Wahrheit und Auflösung",
+                     "description":  "Der verborgene Zusammenhang wird erkannt, bewiesen und verarbeitet.",
+                     "order":  2,
+                     "beats":  [
+                                   {
+                                       "id":  "hidden-connection",
+                                       "title":  "Verborgener Zusammenhang",
+                                       "description":  "Getrennte Hinweise verbinden sich zur tragfaehigen Loesung.",
+                                       "guidingQuestions":  [
+                                                                "Welches Muster verbindet die Spuren?",
+                                                                "Warum blieb es verborgen?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  70,
+                                       "suggestedPercentageEnd":  82,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "confrontation",
+                                       "title":  "Konfrontation",
+                                       "description":  "Die ermittelte Wahrheit wird unter Risiko gegen den Widerstand gestellt.",
+                                       "guidingQuestions":  [
+                                                                "Wie wird die Loesung bewiesen?",
+                                                                "Welche Gegenwehr ist zu erwarten?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  80,
+                                       "suggestedPercentageEnd":  92,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "resolution",
+                                       "title":  "Auflösung",
+                                       "description":  "Tathergang, Motiv und offene Irrwege werden nachvollziehbar geklaert.",
+                                       "guidingQuestions":  [
+                                                                "Sind alle entscheidenden Spuren erklaert?",
+                                                                "Welche Fehldeutung wird berichtigt?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  90,
+                                       "suggestedPercentageEnd":  97,
+                                       "order":  2
+                                   },
+                                   {
+                                       "id":  "aftermath",
+                                       "title":  "Nachspiel",
+                                       "description":  "Folgen für Ermittler, Betroffene und Ordnung werden sichtbar.",
+                                       "guidingQuestions":  [
+                                                                "Wer lebt mit welchen Folgen?",
+                                                                "Welche Ordnung ist wiederhergestellt oder verloren?"
+                                                            ],
+                                       "required":  false,
+                                       "suggestedPercentageStart":  96,
+                                       "suggestedPercentageEnd":  100,
+                                       "order":  3
+                                   }
+                               ]
+                 }
+             ]
+}

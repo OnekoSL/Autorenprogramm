@@ -1,5 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import { requireTauriRuntime } from "./tauri";
+export type SceneStatus = "draft" | "revision" | "complete";
 
 export interface ManuscriptTree {
   novel: NovelSnapshot;
@@ -35,7 +36,7 @@ export interface SceneSnapshot {
   chapterId: string;
   title: string;
   text: string;
-  status: string;
+  status: SceneStatus;
   summary: string;
   sortOrder: number;
 }
@@ -73,7 +74,7 @@ export interface UpdateSceneInput {
   id: string;
   title: string;
   text: string;
-  status: string;
+  status: SceneStatus;
   summary: string;
 }
 

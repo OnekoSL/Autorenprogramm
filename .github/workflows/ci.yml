@@ -29,14 +29,35 @@ jobs:
           rustup toolchain install stable --profile minimal
           rustup default stable
 
-      - name: Abhaengigkeiten installieren
+      - name: Abhängigkeiten installieren
         run: npm ci
 
-      - name: Versionen pruefen
+      - name: Versionen prüfen
         run: npm run check:version
+
+      - name: Mehrsprachigkeit prüfen
+        run: npm run check:i18n
+
+      - name: Frontend-Tests mit Coverage ausführen
+        run: npm run test:coverage
+
+      - name: Coverage-Bericht bereitstellen
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage
+          path: coverage
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Rust-Formatierung prüfen
+        run: cargo fmt --check --manifest-path src-tauri/Cargo.toml
+
+      - name: Rust-Lints prüfen
+        run: cargo clippy --locked --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
+
+      - name: Rust-Tests ausführen
+        run: cargo test --locked --manifest-path src-tauri/Cargo.toml
 
       - name: Frontend bauen
         run: npm run build
-
-      - name: Rust-Tests ausfuehren
-        run: cargo test --locked --manifest-path src-tauri/Cargo.toml

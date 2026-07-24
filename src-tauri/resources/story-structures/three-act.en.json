@@ -1,0 +1,167 @@
+{
+  "formatVersion": 1,
+  "id": "three-act",
+  "name": "Three-act structure",
+  "description": "Universal structure of construction, confrontation and resolution.",
+  "category": "plot",
+  "tags": [
+    "universal",
+    "novel"
+  ],
+  "acts": [
+    {
+      "id": "setup",
+      "title": "Act 1: Setup",
+      "description": "Characters, starting point and central conflict are established.",
+      "order": 0,
+      "beats": [
+        {
+          "id": "opening",
+          "title": "Initial situation",
+          "description": "The previous world and the unfulfilled need become visible.",
+          "guidingQuestions": [
+            "What is normal for the main character?",
+            "What is she already missing?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 0,
+          "suggestedPercentageEnd": 5,
+          "order": 0
+        },
+        {
+          "id": "inciting-incident",
+          "title": "Triggering event",
+          "description": "An event permanently disrupts the previous order.",
+          "guidingQuestions": [
+            "What changes the situation?",
+            "Why can't it be ignored?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 8,
+          "suggestedPercentageEnd": 15,
+          "order": 1
+        },
+        {
+          "id": "first-turn",
+          "title": "First turning point",
+          "description": "The main character chooses the central conflict.",
+          "guidingQuestions": [
+            "Which decision opens Act 2?",
+            "What does this risk?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 20,
+          "suggestedPercentageEnd": 30,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "confrontation",
+      "title": "Act 2: Confrontation",
+      "description": "Resistance grows and changes the understanding of the conflict.",
+      "order": 1,
+      "beats": [
+        {
+          "id": "rising-obstacles",
+          "title": "Rising obstacles",
+          "description": "Attempts by the main character create more difficult problems.",
+          "guidingQuestions": [
+            "Why isn't the first plan enough?",
+            "Which costs are increasing?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 25,
+          "suggestedPercentageEnd": 45,
+          "order": 0
+        },
+        {
+          "id": "midpoint",
+          "title": "Center point",
+          "description": "A revelation or reversal changes the goal and stakes.",
+          "guidingQuestions": [
+            "What information changes everything?",
+            "What can no longer be reversed afterwards?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 45,
+          "suggestedPercentageEnd": 55,
+          "order": 1
+        },
+        {
+          "id": "crisis",
+          "title": "crisis",
+          "description": "The pressure is reaching a point where the current path fails.",
+          "guidingQuestions": [
+            "What does the main character lose?",
+            "Which false assumption collapses?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 65,
+          "suggestedPercentageEnd": 75,
+          "order": 2
+        },
+        {
+          "id": "second-turn",
+          "title": "Second turning point",
+          "description": "A final insight or decision leads to the finale.",
+          "guidingQuestions": [
+            "What makes the last attempt possible?",
+            "What decision is necessary now?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 72,
+          "suggestedPercentageEnd": 80,
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "resolution",
+      "title": "Act 3: Resolution",
+      "description": "The central conflict is decided and its effects are shown.",
+      "order": 2,
+      "beats": [
+        {
+          "id": "final-preparation",
+          "title": "Final preparation",
+          "description": "Forces and decisions are gathering for the final confrontation.",
+          "guidingQuestions": [
+            "What is the specific plan?",
+            "Who bears which price?"
+          ],
+          "required": false,
+          "suggestedPercentageStart": 75,
+          "suggestedPercentageEnd": 85,
+          "order": 0
+        },
+        {
+          "id": "climax",
+          "title": "climax",
+          "description": "The main character faces the decisive conflict.",
+          "guidingQuestions": [
+            "What decision does the development prove?",
+            "How is the conflict resolved?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 85,
+          "suggestedPercentageEnd": 95,
+          "order": 1
+        },
+        {
+          "id": "new-normal",
+          "title": "New normality",
+          "description": "The consequences of the finale and the changed world become visible.",
+          "guidingQuestions": [
+            "What is permanently different?",
+            "What did the main character gain or lose?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 95,
+          "suggestedPercentageEnd": 100,
+          "order": 2
+        }
+      ]
+    }
+  ]
+}

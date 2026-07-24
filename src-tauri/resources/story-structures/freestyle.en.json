@@ -1,0 +1,49 @@
+{
+  "formatVersion": 1,
+  "id": "freestyle",
+  "name": "Free-form structure",
+  "description": "Minimal starting point for authors who want to develop their structure without a fixed model.",
+  "category": "custom",
+  "tags": [
+    "free",
+    "minimal"
+  ],
+  "planningMethods": [
+    {
+      "id": "snowflake",
+      "name": "Snowflake method",
+      "description": "A way of working in which a core idea is gradually expanded into characters, plot, scene list and manuscript.",
+      "steps": [
+        "One-sentence summary",
+        "One paragraph summary",
+        "Character overview",
+        "Extended plot",
+        "Character descriptions",
+        "Scene list",
+        "Scene designs",
+        "manuscript"
+      ]
+    }
+  ],
+  "acts": [
+    {
+      "id": "free-area",
+      "title": "Free area",
+      "description": "A neutral area that can be renamed, expanded, or reclassified as needed.",
+      "order": 0,
+      "beats": [
+        {
+          "id": "free-beat",
+          "title": "Free plot point",
+          "description": "An open action point as a starting point for your own chapter planning.",
+          "guidingQuestions": [
+            "What should happen in this part of the story?",
+            "What other areas or chapters are needed for this?"
+          ],
+          "required": false,
+          "order": 0
+        }
+      ]
+    }
+  ]
+}

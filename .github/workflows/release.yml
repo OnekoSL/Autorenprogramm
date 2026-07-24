@@ -28,18 +28,30 @@ jobs:
           rustup toolchain install stable --profile minimal
           rustup default stable
 
-      - name: Abhaengigkeiten installieren
+      - name: Abhängigkeiten installieren
         run: npm ci
 
-      - name: Tag und Versionen pruefen
+      - name: Tag und Versionen prüfen
         shell: pwsh
         run: npm run check:version -- $env:GITHUB_REF_NAME
 
+      - name: Mehrsprachigkeit prüfen
+        run: npm run check:i18n
+
+      - name: Frontend-Tests ausführen
+        run: npm run test
+
+      - name: Rust-Formatierung prüfen
+        run: cargo fmt --check --manifest-path src-tauri/Cargo.toml
+
+      - name: Rust-Lints prüfen
+        run: cargo clippy --locked --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
+
+      - name: Rust-Tests ausführen
+        run: cargo test --locked --manifest-path src-tauri/Cargo.toml
+
       - name: Frontend bauen
         run: npm run build
-
-      - name: Rust-Tests ausfuehren
-        run: cargo test --locked --manifest-path src-tauri/Cargo.toml
 
       - name: NSIS-Installer bauen
         run: npx tauri build --bundles nsis
@@ -54,7 +66,7 @@ jobs:
           $hash = (Get-FileHash $installer.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
           [IO.File]::WriteAllText($checksum, "$hash  $($installer.Name)`n")
 
-      - name: GitHub Pre-release veroeffentlichen
+      - name: GitHub Pre-release veröffentlichen
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
@@ -66,5 +78,5 @@ jobs:
           gh release create $env:GITHUB_REF_NAME $installer.FullName $checksum `
             --verify-tag `
             --prerelease `
-            --title "Autorenprogramm $env:GITHUB_REF_NAME – MVP-Testrelease" `
+            --title "Autorenprogramm $env:GITHUB_REF_NAME – zweisprachige Testversion / bilingual test build" `
             --notes-file RELEASE_NOTES.md

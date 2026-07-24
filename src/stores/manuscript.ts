@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import { i18n } from "../i18n";
+import { normalizeUiError, type UiError } from "../errors";
 import {
   createArea as createAreaCommand,
   createChapter as createChapterCommand,
@@ -19,19 +21,6 @@ import {
   type SceneSnapshot,
   type UpdateSceneInput,
 } from "../api/manuscript";
-import type { CommandError } from "../api/project";
-
-function normalizeError(error: unknown) {
-  if (typeof error === "object" && error && "message" in error) {
-    return (error as CommandError).message;
-  }
-
-  if (typeof error === "string") {
-    return error;
-  }
-
-  return "Die Manuskriptaktion ist fehlgeschlagen.";
-}
 
 function allChapters(tree: ManuscriptTree | null) {
   return tree?.areas.flatMap((area) => area.chapters) ?? [];
@@ -86,7 +75,7 @@ export const useManuscriptStore = defineStore("manuscript", {
     activeSceneId: "",
     isLoading: false,
     isSaving: false,
-    error: "",
+    error: null as UiError | null,
   }),
   getters: {
     areas(state): AreaSnapshot[] {
@@ -128,21 +117,23 @@ export const useManuscriptStore = defineStore("manuscript", {
         for (const [chapterIndex, chapter] of area.chapters.entries()) {
           const sceneIndex = chapter.scenes.findIndex((scene) => scene.id === this.activeSceneId);
           if (sceneIndex >= 0) {
-            return `Bereich ${areaIndex + 1} / Kapitel ${chapterIndex + 1} / Szene ${
-              sceneIndex + 1
-            }`;
+            return i18n.global.t("writing.location", {
+              area: areaIndex + 1,
+              chapter: chapterIndex + 1,
+              scene: sceneIndex + 1,
+            });
           }
         }
       }
 
-      return "Keine Szene";
+      return i18n.global.t("writing.noScene");
     },
   },
   actions: {
     reset() {
       this.tree = null;
       this.activeSceneId = "";
-      this.error = "";
+      this.error = null;
     },
     setTree(tree: ManuscriptTree, preferredSceneId?: string) {
       this.tree = tree;
@@ -155,12 +146,12 @@ export const useManuscriptStore = defineStore("manuscript", {
     },
     async loadTree() {
       this.isLoading = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.setTree(await getManuscriptTree());
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isLoading = false;
       }
@@ -168,17 +159,17 @@ export const useManuscriptStore = defineStore("manuscript", {
     async createArea() {
       const before = areaIds(this.tree);
       const activeAreaId = this.activeArea?.id;
-      this.error = "";
+      this.error = null;
 
       try {
         const tree = await createAreaCommand({
-          title: "Neuer Bereich",
+          title: i18n.global.t("writing.newArea"),
           afterAreaId: activeAreaId,
         });
         const newArea = tree.areas.find((area) => !before.has(area.id));
         this.setTree(tree, newArea?.chapters[0]?.scenes[0]?.id ?? this.activeSceneId);
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
     async createChapter(areaId?: string) {
@@ -186,40 +177,40 @@ export const useManuscriptStore = defineStore("manuscript", {
       const targetAreaId = areaId || this.activeArea?.id || this.areas[0]?.id || "";
       const activeChapterId =
         this.activeChapter?.areaId === targetAreaId ? this.activeChapter?.id : undefined;
-      this.error = "";
+      this.error = null;
 
       try {
         const tree = await createChapterCommand({
           areaId: targetAreaId,
-          title: "Neues Kapitel",
+          title: i18n.global.t("writing.newChapter"),
           afterChapterId: activeChapterId,
         });
         const newChapter = allChapters(tree).find((chapter) => !before.has(chapter.id));
         this.setTree(tree, newChapter?.scenes[0]?.id ?? this.activeSceneId);
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
     async createScene(chapterId?: string) {
       const before = sceneIds(this.tree);
       const activeSceneId = this.activeSceneId;
       const targetChapterId = chapterId || this.activeChapter?.id || this.chapters[0]?.id || "";
-      this.error = "";
+      this.error = null;
 
       try {
         const tree = await createSceneCommand({
           chapterId: targetChapterId,
-          title: "Neue Szene",
+          title: i18n.global.t("writing.newScene"),
           afterSceneId: activeSceneId || undefined,
         });
         const newScene = allScenes(tree).find((scene) => !before.has(scene.id));
         this.setTree(tree, newScene?.id ?? this.activeSceneId);
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
     async updateArea(area: AreaSnapshot) {
-      this.error = "";
+      this.error = null;
 
       try {
         this.setTree(
@@ -230,11 +221,11 @@ export const useManuscriptStore = defineStore("manuscript", {
           }),
         );
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
     async updateChapter(chapter: ChapterSnapshot) {
-      this.error = "";
+      this.error = null;
 
       try {
         this.setTree(
@@ -245,46 +236,48 @@ export const useManuscriptStore = defineStore("manuscript", {
           }),
         );
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
     async updateScene(input: UpdateSceneInput) {
       this.isSaving = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.setTree(await updateSceneCommand(input), input.id);
+        return true;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
+        return false;
       } finally {
         this.isSaving = false;
       }
     },
     async moveArea(areaId: string, targetIndex: number) {
-      this.error = "";
+      this.error = null;
 
       try {
         this.setTree(await moveAreaCommand({ areaId, targetIndex }));
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
     async moveChapter(chapterId: string, targetAreaId: string, targetIndex: number) {
-      this.error = "";
+      this.error = null;
 
       try {
         this.setTree(await moveChapterCommand({ chapterId, targetAreaId, targetIndex }));
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
     async moveScene(sceneId: string, targetChapterId: string, targetIndex: number) {
-      this.error = "";
+      this.error = null;
 
       try {
         this.setTree(await moveSceneCommand({ sceneId, targetChapterId, targetIndex }), sceneId);
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
     async deleteArea(areaId: string) {
@@ -294,7 +287,7 @@ export const useManuscriptStore = defineStore("manuscript", {
           ?.chapters.flatMap((chapter) => chapter.scenes.map((scene) => scene.id)) ?? [],
       );
       const beforeTree = this.tree;
-      this.error = "";
+      this.error = null;
 
       try {
         const tree = await deleteAreaCommand({ id: areaId });
@@ -303,7 +296,7 @@ export const useManuscriptStore = defineStore("manuscript", {
           nextSceneAfterDelete(beforeTree, tree, deletedSceneIds, this.activeSceneId),
         );
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
     async deleteChapter(chapterId: string) {
@@ -313,7 +306,7 @@ export const useManuscriptStore = defineStore("manuscript", {
           ?.scenes.map((scene) => scene.id) ?? [],
       );
       const beforeTree = this.tree;
-      this.error = "";
+      this.error = null;
 
       try {
         const tree = await deleteChapterCommand({ id: chapterId });
@@ -322,12 +315,12 @@ export const useManuscriptStore = defineStore("manuscript", {
           nextSceneAfterDelete(beforeTree, tree, deletedSceneIds, this.activeSceneId),
         );
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
     async deleteScene(sceneId: string) {
       const beforeTree = this.tree;
-      this.error = "";
+      this.error = null;
 
       try {
         const tree = await deleteSceneCommand({ id: sceneId });
@@ -336,7 +329,7 @@ export const useManuscriptStore = defineStore("manuscript", {
           nextSceneAfterDelete(beforeTree, tree, new Set([sceneId]), this.activeSceneId),
         );
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
   },

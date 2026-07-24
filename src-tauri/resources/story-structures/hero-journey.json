@@ -1,0 +1,194 @@
+{
+    "formatVersion":  1,
+    "id":  "hero-journey",
+    "name":  "Heldenreise",
+    "description":  "Reise aus der gewohnten Welt durch Prüfung, Wandlung und Rückkehr.",
+    "category":  "plot",
+    "tags":  [
+                 "fantasy",
+                 "abenteuer",
+                 "coming-of-age"
+             ],
+    "acts":  [
+                 {
+                     "id":  "departure",
+                     "title":  "Aufbruch",
+                     "description":  "Die Hauptfigur verlaesst ihre vertraute Ordnung.",
+                     "order":  0,
+                     "beats":  [
+                                   {
+                                       "id":  "ordinary-world",
+                                       "title":  "Gewohnte Welt",
+                                       "description":  "Alltag, Mangel und Potenzial der Hauptfigur werden sichtbar.",
+                                       "guidingQuestions":  [
+                                                                "Was bindet sie an diese Welt?",
+                                                                "Welche innere Luecke besteht?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  0,
+                                       "suggestedPercentageEnd":  8,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "call",
+                                       "title":  "Ruf zum Abenteuer",
+                                       "description":  "Eine Aufgabe oder Bedrohung fordert Veränderung.",
+                                       "guidingQuestions":  [
+                                                                "Wer oder was ruft?",
+                                                                "Was steht bei Untaetigkeit auf dem Spiel?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  8,
+                                       "suggestedPercentageEnd":  12,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "refusal",
+                                       "title":  "Verweigerung",
+                                       "description":  "Angst, Pflicht oder Zweifel hemmen den Aufbruch.",
+                                       "guidingQuestions":  [
+                                                                "Warum zoegert die Figur?",
+                                                                "Was macht die Weigerung unhaltbar?"
+                                                            ],
+                                       "required":  false,
+                                       "suggestedPercentageStart":  10,
+                                       "suggestedPercentageEnd":  18,
+                                       "order":  2
+                                   },
+                                   {
+                                       "id":  "mentor",
+                                       "title":  "Begegnung mit dem Mentor",
+                                       "description":  "Hilfe, Wissen oder ein Werkzeug bereiten den Weg.",
+                                       "guidingQuestions":  [
+                                                                "Welche Hilfe wird gegeben?",
+                                                                "Was muss die Figur selbst leisten?"
+                                                            ],
+                                       "required":  false,
+                                       "suggestedPercentageStart":  12,
+                                       "suggestedPercentageEnd":  22,
+                                       "order":  3
+                                   },
+                                   {
+                                       "id":  "threshold",
+                                       "title":  "Überschreiten der Schwelle",
+                                       "description":  "Die Hauptfigur betritt die unbekannte Welt des Konflikts.",
+                                       "guidingQuestions":  [
+                                                                "Welche Grenze wird überschritten?",
+                                                                "Warum ist die Rückkehr nun schwer?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  20,
+                                       "suggestedPercentageEnd":  28,
+                                       "order":  4
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "initiation",
+                     "title":  "Prüfungen und Wandlung",
+                     "description":  "Beziehungen, Gefahren und Erkenntnisse formen die Hauptfigur.",
+                     "order":  1,
+                     "beats":  [
+                                   {
+                                       "id":  "tests",
+                                       "title":  "Prüfungen, Verbündete und Feinde",
+                                       "description":  "Die Regeln der neuen Welt werden durch Konflikte gelernt.",
+                                       "guidingQuestions":  [
+                                                                "Wer erweist sich als verlaesslich?",
+                                                                "Welche Faehigkeit fehlt noch?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  25,
+                                       "suggestedPercentageEnd":  42,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "approach",
+                                       "title":  "Annaeherung an die tiefste Hoehle",
+                                       "description":  "Die Figur bereitet sich auf den Kernkonflikt vor.",
+                                       "guidingQuestions":  [
+                                                                "Welcher Angst naehert sie sich?",
+                                                                "Welche Vorbereitung ist nötig?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  40,
+                                       "suggestedPercentageEnd":  50,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "ordeal",
+                                       "title":  "Entscheidende Prüfung",
+                                       "description":  "Eine existenzielle Krise verlangt Wandlung oder Opfer.",
+                                       "guidingQuestions":  [
+                                                                "Was muss symbolisch sterben?",
+                                                                "Welche Wahrheit wird angenommen?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  48,
+                                       "suggestedPercentageEnd":  60,
+                                       "order":  2
+                                   },
+                                   {
+                                       "id":  "reward",
+                                       "title":  "Belohnung",
+                                       "description":  "Nach der Prüfung wird Wissen, Macht oder Versöhnung gewonnen.",
+                                       "guidingQuestions":  [
+                                                                "Was wurde wirklich gewonnen?",
+                                                                "Welche Gefahr ist noch nicht vorbei?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  58,
+                                       "suggestedPercentageEnd":  68,
+                                       "order":  3
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "return",
+                     "title":  "Rückkehr",
+                     "description":  "Die Wandlung muss in einer letzten Prüfung bestätigt werden.",
+                     "order":  2,
+                     "beats":  [
+                                   {
+                                       "id":  "road-back",
+                                       "title":  "Rückweg",
+                                       "description":  "Folgen und Gegner zwingen die Figur zur Rückkehr.",
+                                       "guidingQuestions":  [
+                                                                "Was verfolgt sie?",
+                                                                "Warum muss sie zurückkehren?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  65,
+                                       "suggestedPercentageEnd":  78,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "resurrection",
+                                       "title":  "Auferstehung",
+                                       "description":  "Die letzte Prüfung zeigt die vollzogene Wandlung.",
+                                       "guidingQuestions":  [
+                                                                "Welche alte Schwäche wird überwunden?",
+                                                                "Wem dient die Entscheidung außer ihr selbst?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  78,
+                                       "suggestedPercentageEnd":  94,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "elixir",
+                                       "title":  "Rückkehr mit dem Elixier",
+                                       "description":  "Die gewonnene Erkenntnis verändert die Ausgangswelt.",
+                                       "guidingQuestions":  [
+                                                                "Was bringt die Figur zurück?",
+                                                                "Wie profitiert die Gemeinschaft?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  94,
+                                       "suggestedPercentageEnd":  100,
+                                       "order":  2
+                                   }
+                               ]
+                 }
+             ]
+}
