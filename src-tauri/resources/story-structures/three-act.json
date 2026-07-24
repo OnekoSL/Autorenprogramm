@@ -1,0 +1,167 @@
+{
+    "formatVersion":  1,
+    "id":  "three-act",
+    "name":  "Dreiaktstruktur",
+    "description":  "Universelle Struktur aus Aufbau, Konfrontation und Auflösung.",
+    "category":  "plot",
+    "tags":  [
+                 "universell",
+                 "roman"
+             ],
+    "acts":  [
+                 {
+                     "id":  "setup",
+                     "title":  "Akt 1: Aufbau",
+                     "description":  "Figuren, Ausgangslage und zentraler Konflikt werden etabliert.",
+                     "order":  0,
+                     "beats":  [
+                                   {
+                                       "id":  "opening",
+                                       "title":  "Ausgangslage",
+                                       "description":  "Die bisherige Welt und das unerfüllte Bedürfnis werden sichtbar.",
+                                       "guidingQuestions":  [
+                                                                "Was ist für die Hauptfigur normal?",
+                                                                "Was fehlt ihr bereits?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  0,
+                                       "suggestedPercentageEnd":  5,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "inciting-incident",
+                                       "title":  "Auslösendes Ereignis",
+                                       "description":  "Ein Ereignis stört die bisherige Ordnung dauerhaft.",
+                                       "guidingQuestions":  [
+                                                                "Was verändert die Situation?",
+                                                                "Warum kann es nicht ignoriert werden?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  8,
+                                       "suggestedPercentageEnd":  15,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "first-turn",
+                                       "title":  "Erster Wendepunkt",
+                                       "description":  "Die Hauptfigur entscheidet sich für den zentralen Konflikt.",
+                                       "guidingQuestions":  [
+                                                                "Welche Entscheidung öffnet Akt 2?",
+                                                                "Was wird dadurch riskiert?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  20,
+                                       "suggestedPercentageEnd":  30,
+                                       "order":  2
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "confrontation",
+                     "title":  "Akt 2: Konfrontation",
+                     "description":  "Widerstände wachsen und verändern das Verständnis des Konflikts.",
+                     "order":  1,
+                     "beats":  [
+                                   {
+                                       "id":  "rising-obstacles",
+                                       "title":  "Steigende Hindernisse",
+                                       "description":  "Versuche der Hauptfigur erzeugen schwierigere Probleme.",
+                                       "guidingQuestions":  [
+                                                                "Warum reicht der erste Plan nicht?",
+                                                                "Welche Kosten steigen?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  25,
+                                       "suggestedPercentageEnd":  45,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "midpoint",
+                                       "title":  "Mittelpunkt",
+                                       "description":  "Eine Enthüllung oder Umkehr verändert Ziel und Einsatz.",
+                                       "guidingQuestions":  [
+                                                                "Welche Information verändert alles?",
+                                                                "Was ist danach nicht mehr umkehrbar?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  45,
+                                       "suggestedPercentageEnd":  55,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "crisis",
+                                       "title":  "Krise",
+                                       "description":  "Der Druck erreicht einen Punkt, an dem der bisherige Weg scheitert.",
+                                       "guidingQuestions":  [
+                                                                "Was verliert die Hauptfigur?",
+                                                                "Welche falsche Annahme bricht zusammen?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  65,
+                                       "suggestedPercentageEnd":  75,
+                                       "order":  2
+                                   },
+                                   {
+                                       "id":  "second-turn",
+                                       "title":  "Zweiter Wendepunkt",
+                                       "description":  "Eine letzte Erkenntnis oder Entscheidung führt ins Finale.",
+                                       "guidingQuestions":  [
+                                                                "Was ermöglicht den letzten Versuch?",
+                                                                "Welche Entscheidung ist jetzt nötig?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  72,
+                                       "suggestedPercentageEnd":  80,
+                                       "order":  3
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "resolution",
+                     "title":  "Akt 3: Auflösung",
+                     "description":  "Der zentrale Konflikt wird entschieden und seine Wirkung gezeigt.",
+                     "order":  2,
+                     "beats":  [
+                                   {
+                                       "id":  "final-preparation",
+                                       "title":  "Finale Vorbereitung",
+                                       "description":  "Kräfte und Entscheidungen für die letzte Konfrontation sammeln sich.",
+                                       "guidingQuestions":  [
+                                                                "Was ist der konkrete Plan?",
+                                                                "Wer trägt welchen Preis?"
+                                                            ],
+                                       "required":  false,
+                                       "suggestedPercentageStart":  75,
+                                       "suggestedPercentageEnd":  85,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "climax",
+                                       "title":  "Höhepunkt",
+                                       "description":  "Die Hauptfigur stellt sich dem entscheidenden Konflikt.",
+                                       "guidingQuestions":  [
+                                                                "Welche Entscheidung beweist die Entwicklung?",
+                                                                "Wie wird der Konflikt entschieden?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  85,
+                                       "suggestedPercentageEnd":  95,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "new-normal",
+                                       "title":  "Neue Normalität",
+                                       "description":  "Die Folgen des Finales und die veränderte Welt werden sichtbar.",
+                                       "guidingQuestions":  [
+                                                                "Was ist dauerhaft anders?",
+                                                                "Was hat die Hauptfigur gewonnen oder verloren?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  95,
+                                       "suggestedPercentageEnd":  100,
+                                       "order":  2
+                                   }
+                               ]
+                 }
+             ]
+}

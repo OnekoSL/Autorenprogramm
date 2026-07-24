@@ -1,18 +1,15 @@
 import { invoke } from "@tauri-apps/api/core";
 import { open, save } from "@tauri-apps/plugin-dialog";
 import { requireTauriRuntime } from "./tauri";
+import type { ProjectLanguage } from "../i18n";
+import { i18n } from "../i18n";
 
-const projectFilters = [
-  {
-    name: "Autorenprojekt",
-    extensions: ["autorenprojekt"],
-  },
-];
+const projectFilters = () => [{ name: i18n.global.locale.value === "en" ? "Author project" : "Autorenprojekt", extensions: ["autorenprojekt"] }];
 
 export interface CreateProjectInput {
   name: string;
   description?: string;
-  defaultLanguage: string;
+  defaultLanguage: ProjectLanguage;
   path: string;
 }
 
@@ -20,7 +17,7 @@ export interface ProjectSnapshot {
   id: string;
   name: string;
   description: string;
-  default_language: string;
+  default_language: ProjectLanguage;
   editor_font_family: string;
   editor_font_size: number;
   path: string;
@@ -32,7 +29,7 @@ export interface ProjectSnapshot {
 export interface UpdateProjectInput {
   name: string;
   description: string;
-  defaultLanguage: string;
+  defaultLanguage: ProjectLanguage;
   editorFontFamily: string;
   editorFontSize: number;
 }
@@ -44,9 +41,13 @@ export interface RecentProject {
   last_opened_at: string;
 }
 
-export interface CommandError {
-  code: string;
-  message: string;
+export interface ProjectDefaultsSnapshot {
+  storyStructureTemplateId: string;
+  storyStructureTemplateName: string;
+}
+
+export interface UpdateProjectDefaultsInput {
+  storyStructureTemplateId: string;
 }
 
 export function createProject(input: CreateProjectInput): Promise<ProjectSnapshot> {
@@ -62,6 +63,18 @@ export function openProject(path: string): Promise<ProjectSnapshot> {
 export function updateProject(input: UpdateProjectInput): Promise<ProjectSnapshot> {
   requireTauriRuntime();
   return invoke<ProjectSnapshot>("update_project", { input });
+}
+
+export function getProjectDefaults(): Promise<ProjectDefaultsSnapshot> {
+  requireTauriRuntime();
+  return invoke("get_project_defaults");
+}
+
+export function updateProjectDefaults(
+  input: UpdateProjectDefaultsInput,
+): Promise<ProjectDefaultsSnapshot> {
+  requireTauriRuntime();
+  return invoke("update_project_defaults", { input });
 }
 
 export function saveProjectCopyAs(path: string): Promise<string> {
@@ -83,7 +96,7 @@ export function chooseProjectSavePath(defaultName: string): Promise<string | nul
   requireTauriRuntime();
   return save({
     defaultPath: defaultName,
-    filters: projectFilters,
+    filters: projectFilters(),
   });
 }
 
@@ -91,7 +104,7 @@ export function chooseProjectBackupPath(defaultName: string): Promise<string | n
   requireTauriRuntime();
   return save({
     defaultPath: defaultName,
-    filters: projectFilters,
+    filters: projectFilters(),
   });
 }
 
@@ -100,7 +113,7 @@ export async function chooseProjectOpenPath(): Promise<string | null> {
   const selected = await open({
     multiple: false,
     directory: false,
-    filters: projectFilters,
+    filters: projectFilters(),
   });
 
   return Array.isArray(selected) ? (selected[0] ?? null) : selected;

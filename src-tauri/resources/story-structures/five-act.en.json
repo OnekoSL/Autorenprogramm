@@ -1,0 +1,196 @@
+{
+  "formatVersion": 1,
+  "id": "five-act",
+  "name": "Five-act structure",
+  "description": "Delicate dramaturgy for complex conflicts and consequences.",
+  "category": "plot",
+  "tags": [
+    "complex",
+    "drama"
+  ],
+  "acts": [
+    {
+      "id": "introduction",
+      "title": "Act 1: Introduction",
+      "description": "The initial situation and conflict are set.",
+      "order": 0,
+      "beats": [
+        {
+          "id": "exposition",
+          "title": "Exposure",
+          "description": "World, characters and tensions are introduced.",
+          "guidingQuestions": [
+            "What order prevails at the beginning?",
+            "Where is there already tension?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 0,
+          "suggestedPercentageEnd": 10,
+          "order": 0
+        },
+        {
+          "id": "trigger",
+          "title": "trigger",
+          "description": "The central conflict is set in motion.",
+          "guidingQuestions": [
+            "What disturbs the order?",
+            "Who has to react to this?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 10,
+          "suggestedPercentageEnd": 20,
+          "order": 1
+        }
+      ]
+    },
+    {
+      "id": "rise",
+      "title": "Act 2: Rising action",
+      "description": "Actions and counteractions exacerbate the conflict.",
+      "order": 1,
+      "beats": [
+        {
+          "id": "complication",
+          "title": "involvement",
+          "description": "The first plan creates new difficulties.",
+          "guidingQuestions": [
+            "Which episode was underestimated?",
+            "Who gains influence from this?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 20,
+          "suggestedPercentageEnd": 32,
+          "order": 0
+        },
+        {
+          "id": "escalation",
+          "title": "escalation",
+          "description": "The characters' scope becomes narrower.",
+          "guidingQuestions": [
+            "Which options are no longer available?",
+            "How do personal costs increase?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 32,
+          "suggestedPercentageEnd": 40,
+          "order": 1
+        }
+      ]
+    },
+    {
+      "id": "center",
+      "title": "Act 3: Central twist",
+      "description": "The conflict reaches a climax or decisive reversal.",
+      "order": 2,
+      "beats": [
+        {
+          "id": "reversal",
+          "title": "Central revelation",
+          "description": "A truth changes the meaning of what has happened so far.",
+          "guidingQuestions": [
+            "Which assumption was wrong?",
+            "Who will recognize the truth first?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 40,
+          "suggestedPercentageEnd": 50,
+          "order": 0
+        },
+        {
+          "id": "high-point",
+          "title": "Central highlight",
+          "description": "The forces meet in a preliminary decision.",
+          "guidingQuestions": [
+            "What seems decided?",
+            "What consequence is triggered?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 50,
+          "suggestedPercentageEnd": 60,
+          "order": 1
+        }
+      ]
+    },
+    {
+      "id": "fall",
+      "title": "Act 4: Falling Action",
+      "description": "The consequences of the turnaround lead to crisis.",
+      "order": 3,
+      "beats": [
+        {
+          "id": "consequences",
+          "title": "Consequences",
+          "description": "Successes and mistakes take their toll.",
+          "guidingQuestions": [
+            "Who pays for the twist?",
+            "Which relationship is changing?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 60,
+          "suggestedPercentageEnd": 72,
+          "order": 0
+        },
+        {
+          "id": "lowest-point",
+          "title": "Low point",
+          "description": "The previous strategy has been exhausted.",
+          "guidingQuestions": [
+            "What seems lost?",
+            "What inner decision is still missing?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 72,
+          "suggestedPercentageEnd": 80,
+          "order": 1
+        }
+      ]
+    },
+    {
+      "id": "finale",
+      "title": "Act 5: Finale and Resolution",
+      "description": "The conflict is finally decided.",
+      "order": 4,
+      "beats": [
+        {
+          "id": "final-decision",
+          "title": "Final decision",
+          "description": "The main character chooses his final path.",
+          "guidingQuestions": [
+            "What has she learned?",
+            "What sacrifice does she accept?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 80,
+          "suggestedPercentageEnd": 88,
+          "order": 0
+        },
+        {
+          "id": "climax",
+          "title": "final",
+          "description": "The decisive confrontation resolves the main conflict.",
+          "guidingQuestions": [
+            "How is the central theme revealed?",
+            "Why can only this exit follow?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 88,
+          "suggestedPercentageEnd": 96,
+          "order": 1
+        },
+        {
+          "id": "resolution",
+          "title": "resolution",
+          "description": "The new order and open consequences are shown.",
+          "guidingQuestions": [
+            "What remains changed?",
+            "Which question should remain unanswered?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 96,
+          "suggestedPercentageEnd": 100,
+          "order": 2
+        }
+      ]
+    }
+  ]
+}

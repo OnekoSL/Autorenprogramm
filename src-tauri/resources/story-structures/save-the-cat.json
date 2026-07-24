@@ -1,0 +1,232 @@
+{
+    "formatVersion":  1,
+    "id":  "save-the-cat",
+    "name":  "Save-the-Cat-Beatsheet",
+    "description":  "Präzises Beatsheet mit fünfzehn Stationen für einen klar geführten Handlungsbogen.",
+    "category":  "plot",
+    "tags":  [
+                 "beatsheet",
+                 "orientierung"
+             ],
+    "acts":  [
+                 {
+                     "id":  "act-one",
+                     "title":  "Akt 1: Setup",
+                     "description":  "Ausgangswelt, Thema und Entscheidung zum Aufbruch.",
+                     "order":  0,
+                     "beats":  [
+                                   {
+                                       "id":  "opening-image",
+                                       "title":  "Eröffnungsbild",
+                                       "description":  "Ein konzentriertes Bild vermittelt Ton und Ausgangszustand.",
+                                       "guidingQuestions":  [
+                                                                "Welches Bild fasst die Ausgangslage zusammen?",
+                                                                "Welchen Kontrast soll das Schlussbild bilden?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  0,
+                                       "suggestedPercentageEnd":  2,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "theme-stated",
+                                       "title":  "Thema wird angedeutet",
+                                       "description":  "Eine Frage oder Aussage weist auf die nötige Erkenntnis hin.",
+                                       "guidingQuestions":  [
+                                                                "Welche Wahrheit muss die Hauptfigur lernen?",
+                                                                "Wer spricht sie aus?"
+                                                            ],
+                                       "required":  false,
+                                       "suggestedPercentageStart":  4,
+                                       "suggestedPercentageEnd":  7,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "setup",
+                                       "title":  "Setup",
+                                       "description":  "Alltag, Beziehungen, Maengel und Ziele werden etabliert.",
+                                       "guidingQuestions":  [
+                                                                "Was funktioniert im Leben der Figur nicht?",
+                                                                "Welche Elemente müssen spaeter wiederkehren?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  1,
+                                       "suggestedPercentageEnd":  10,
+                                       "order":  2
+                                   },
+                                   {
+                                       "id":  "catalyst",
+                                       "title":  "Auslöser",
+                                       "description":  "Ein Ereignis durchbricht den bisherigen Alltag.",
+                                       "guidingQuestions":  [
+                                                                "Was kann nicht rückgaengig gemacht werden?",
+                                                                "Warum trifft es gerade diese Figur?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  9,
+                                       "suggestedPercentageEnd":  12,
+                                       "order":  3
+                                   },
+                                   {
+                                       "id":  "debate",
+                                       "title":  "Zweifel",
+                                       "description":  "Die Hauptfigur ringt mit Risiko und Konsequenzen des Aufbruchs.",
+                                       "guidingQuestions":  [
+                                                                "Welche berechtigte Angst besteht?",
+                                                                "Was macht Nichtstun unmöglich?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  10,
+                                       "suggestedPercentageEnd":  20,
+                                       "order":  4
+                                   },
+                                   {
+                                       "id":  "break-two",
+                                       "title":  "Übergang zu Akt 2",
+                                       "description":  "Eine aktive Entscheidung führt in eine neue Handlungswelt.",
+                                       "guidingQuestions":  [
+                                                                "Welche Wahl trifft die Figur?",
+                                                                "Wie ändert sich die Richtung der Geschichte?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  19,
+                                       "suggestedPercentageEnd":  22,
+                                       "order":  5
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "act-two",
+                     "title":  "Akt 2: Konfrontation",
+                     "description":  "Versprechen, Nebenhandlung, Umkehr und zunehmender Druck.",
+                     "order":  1,
+                     "beats":  [
+                                   {
+                                       "id":  "b-story",
+                                       "title":  "Nebenhandlung",
+                                       "description":  "Eine zweite Beziehung oder Handlung spiegelt das Thema.",
+                                       "guidingQuestions":  [
+                                                                "Wer zeigt eine andere Sicht auf das Thema?",
+                                                                "Wie beeinflusst dies den Hauptkonflikt?"
+                                                            ],
+                                       "required":  false,
+                                       "suggestedPercentageStart":  21,
+                                       "suggestedPercentageEnd":  28,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "fun-games",
+                                       "title":  "Spaß und Spiele",
+                                       "description":  "Das zentrale Versprechen der Geschichte entfaltet sich in Erfolgen und Problemen.",
+                                       "guidingQuestions":  [
+                                                                "Welche Erwartungen des Genres werden erfuellt?",
+                                                                "Was lernt die Figur durch Handeln?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  22,
+                                       "suggestedPercentageEnd":  48,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "midpoint",
+                                       "title":  "Mittelpunkt",
+                                       "description":  "Ein scheinbarer Sieg oder Verlust erhoeht Einsatz und Zeitdruck.",
+                                       "guidingQuestions":  [
+                                                                "Was verändert die Bedeutung des Ziels?",
+                                                                "Wie steigt der Einsatz?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  48,
+                                       "suggestedPercentageEnd":  52,
+                                       "order":  2
+                                   },
+                                   {
+                                       "id":  "bad-guys-close-in",
+                                       "title":  "Das Netz zieht sich zu",
+                                       "description":  "Aeussere Gegner und innere Fehler verengen die Moeglichkeiten.",
+                                       "guidingQuestions":  [
+                                                                "Welche Kräfte gewinnen an Boden?",
+                                                                "Welcher innere Fehler verschärft die Lage?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  52,
+                                       "suggestedPercentageEnd":  72,
+                                       "order":  3
+                                   },
+                                   {
+                                       "id":  "all-is-lost",
+                                       "title":  "Alles ist verloren",
+                                       "description":  "Ein schwerer Verlust zerstört den bisherigen Plan.",
+                                       "guidingQuestions":  [
+                                                                "Was geht sichtbar verloren?",
+                                                                "Warum versagt die alte Strategie?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  72,
+                                       "suggestedPercentageEnd":  77,
+                                       "order":  4
+                                   },
+                                   {
+                                       "id":  "dark-night",
+                                       "title":  "Dunkle Nacht der Seele",
+                                       "description":  "Die Figur verarbeitet den Tiefpunkt und findet eine neue Wahrheit.",
+                                       "guidingQuestions":  [
+                                                                "Welche Wahrheit wird endlich akzeptiert?",
+                                                                "Was gibt neuen Mut?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  75,
+                                       "suggestedPercentageEnd":  80,
+                                       "order":  5
+                                   },
+                                   {
+                                       "id":  "break-three",
+                                       "title":  "Übergang zu Akt 3",
+                                       "description":  "Haupt- und Nebenhandlung verbinden sich zu einem neuen Plan.",
+                                       "guidingQuestions":  [
+                                                                "Welche Erkenntnisse werden kombiniert?",
+                                                                "Warum kann der neue Plan funktionieren?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  79,
+                                       "suggestedPercentageEnd":  82,
+                                       "order":  6
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "act-three",
+                     "title":  "Akt 3: Finale",
+                     "description":  "Der neue Plan wird umgesetzt und das Thema bewiesen.",
+                     "order":  2,
+                     "beats":  [
+                                   {
+                                       "id":  "finale",
+                                       "title":  "Finale",
+                                       "description":  "Die Figur überwindet Widerstand durch ihre vollzogene Entwicklung.",
+                                       "guidingQuestions":  [
+                                                                "Wie prüft das Finale die neue Haltung?",
+                                                                "Welche Ordnung entsteht?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  80,
+                                       "suggestedPercentageEnd":  99,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "final-image",
+                                       "title":  "Schlussbild",
+                                       "description":  "Ein letztes Bild zeigt die Veränderung gegenüber dem Anfang.",
+                                       "guidingQuestions":  [
+                                                                "Was ist sichtbar anders?",
+                                                                "Welche emotionale Note bleibt?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  98,
+                                       "suggestedPercentageEnd":  100,
+                                       "order":  1
+                                   }
+                               ]
+                 }
+             ]
+}

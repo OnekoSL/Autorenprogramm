@@ -1,0 +1,49 @@
+{
+    "formatVersion":  1,
+    "id":  "freestyle",
+    "name":  "Freie Struktur",
+    "description":  "Minimaler Ausgangspunkt für Autoren, die ihre Gliederung ohne festes Modell entwickeln möchten.",
+    "category":  "custom",
+    "tags":  [
+                 "frei",
+                 "minimal"
+             ],
+    "planningMethods":  [
+                            {
+                                "id":  "snowflake",
+                                "name":  "Schneeflockenmethode",
+                                "description":  "Eine Arbeitsweise, bei der eine Kernidee schrittweise zu Figuren, Handlung, Szenenliste und Manuskript erweitert wird.",
+                                "steps":  [
+                                              "Ein-Satz-Zusammenfassung",
+                                              "Ein-Absatz-Zusammenfassung",
+                                              "Figurenübersicht",
+                                              "Erweiterte Handlung",
+                                              "Figurenbeschreibungen",
+                                              "Szenenliste",
+                                              "Szenenentwürfe",
+                                              "Manuskript"
+                                          ]
+                            }
+                        ],
+    "acts":  [
+                 {
+                     "id":  "free-area",
+                     "title":  "Freier Bereich",
+                     "description":  "Ein neutraler Bereich, der nach Bedarf umbenannt, erweitert oder neu eingeordnet werden kann.",
+                     "order":  0,
+                     "beats":  [
+                                   {
+                                       "id":  "free-beat",
+                                       "title":  "Freier Handlungspunkt",
+                                       "description":  "Ein offener Handlungspunkt als Ausgangspunkt für die eigene Kapitelplanung.",
+                                       "guidingQuestions":  [
+                                                                "Was soll in diesem Teil der Geschichte geschehen?",
+                                                                "Welche weiteren Bereiche oder Kapitel werden dafür benötigt?"
+                                                            ],
+                                       "required":  false,
+                                       "order":  0
+                                   }
+                               ]
+                 }
+             ]
+}

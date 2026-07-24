@@ -1,9 +1,11 @@
 import { defineStore } from "pinia";
+import { normalizeUiError, type UiError } from "../errors";
 import {
   acceptAiSuggestion,
   acceptAiBibleSuggestion,
   checkSceneContradictions,
   completeBibleCardFromKeywords,
+  editBibleCard,
   generateBibleCardFromKeywords,
   generateTextAlternatives,
   getAiProviderStatus,
@@ -20,6 +22,7 @@ import {
   updateAiSettings,
   type AiBibleAcceptResult,
   type AiBibleCardDraft,
+  type AiBibleEditableField,
   type AiBibleSuggestionSnapshot,
   type AiChatMode,
   type AiChatMessage,
@@ -31,20 +34,7 @@ import {
   type AiSuggestionSnapshot,
   type UpdateAiSettingsInput,
 } from "../api/ai";
-import type { CommandError } from "../api/project";
 import type { ProjectBibleCardType } from "../api/projectBible";
-
-function normalizeError(error: unknown) {
-  if (typeof error === "object" && error && "message" in error) {
-    return (error as CommandError).message;
-  }
-
-  if (typeof error === "string") {
-    return error;
-  }
-
-  return "Die KI-Aktion ist fehlgeschlagen.";
-}
 
 export const useAiStore = defineStore("ai", {
   state: () => ({
@@ -69,7 +59,7 @@ export const useAiStore = defineStore("ai", {
     isRunningAlternatives: false,
     isRunningImprovements: false,
     isSaving: false,
-    error: "",
+    error: null as UiError | null,
   }),
   getters: {
     activeSuggestion(state): AiSuggestionSnapshot | null {
@@ -114,11 +104,11 @@ export const useAiStore = defineStore("ai", {
       this.chatMessages = [];
       this.textAlternatives = [];
       this.textImprovements = [];
-      this.error = "";
+      this.error = null;
     },
     clearChat() {
       this.chatMessages = [];
-      this.error = "";
+      this.error = null;
     },
     clearTextAlternatives() {
       this.textAlternatives = [];
@@ -127,7 +117,7 @@ export const useAiStore = defineStore("ai", {
       this.textImprovements = [];
     },
     async loadSettings() {
-      this.error = "";
+      this.error = null;
 
       try {
         this.settings = await getAiSettings();
@@ -136,12 +126,12 @@ export const useAiStore = defineStore("ai", {
           await this.loadModels();
         }
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       }
     },
     async updateSettings(input: UpdateAiSettingsInput) {
       this.isSaving = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.settings = await updateAiSettings(input);
@@ -150,7 +140,7 @@ export const useAiStore = defineStore("ai", {
           await this.loadModels();
         }
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isSaving = false;
       }
@@ -167,7 +157,7 @@ export const useAiStore = defineStore("ai", {
     },
     async checkProviderStatus() {
       this.isCheckingProvider = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.providerStatus = await getAiProviderStatus();
@@ -175,14 +165,14 @@ export const useAiStore = defineStore("ai", {
           this.models = [];
         }
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isCheckingProvider = false;
       }
     },
     async startProvider() {
       this.isStartingProvider = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.providerStatus = await startLocalAiProvider();
@@ -193,7 +183,7 @@ export const useAiStore = defineStore("ai", {
           await this.loadModels();
         }
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isStartingProvider = false;
       }
@@ -205,13 +195,13 @@ export const useAiStore = defineStore("ai", {
       }
 
       this.isLoadingModels = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.models = await listAiModels();
       } catch (error) {
         this.models = [];
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isLoadingModels = false;
       }
@@ -230,7 +220,7 @@ export const useAiStore = defineStore("ai", {
       const userMessage: AiChatMessage = { role: "user", content: text };
       this.chatMessages = [...this.chatMessages, userMessage];
       this.isRunningChat = true;
-      this.error = "";
+      this.error = null;
 
       try {
         const response = await sendAiChatMessage({
@@ -242,7 +232,7 @@ export const useAiStore = defineStore("ai", {
         this.chatMessages = [...this.chatMessages, response.message];
       } catch (error) {
         this.chatMessages = this.chatMessages.slice(0, -1);
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isRunningChat = false;
       }
@@ -254,7 +244,7 @@ export const useAiStore = defineStore("ai", {
       }
 
       this.isLoading = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.suggestions = await listAiSuggestionsForScene(sceneId);
@@ -263,14 +253,14 @@ export const useAiStore = defineStore("ai", {
           this.suggestions[0]?.id ??
           "";
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isLoading = false;
       }
     },
     async loadBibleSuggestions(targetType?: ProjectBibleCardType, targetId?: string) {
       this.isLoadingBibleSuggestions = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.bibleSuggestions = await listAiBibleSuggestions(targetType, targetId);
@@ -279,7 +269,7 @@ export const useAiStore = defineStore("ai", {
           this.bibleSuggestions[0]?.id ??
           "";
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isLoadingBibleSuggestions = false;
       }
@@ -290,7 +280,7 @@ export const useAiStore = defineStore("ai", {
       }
 
       this.isRunning = true;
-      this.error = "";
+      this.error = null;
 
       try {
         const suggestion = await summarizeScene(sceneId);
@@ -300,7 +290,7 @@ export const useAiStore = defineStore("ai", {
         ];
         this.activeSuggestionId = suggestion.id;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isRunning = false;
       }
@@ -311,7 +301,7 @@ export const useAiStore = defineStore("ai", {
       }
 
       this.isRunning = true;
-      this.error = "";
+      this.error = null;
 
       try {
         const suggestion = await checkSceneContradictions(sceneId);
@@ -321,42 +311,42 @@ export const useAiStore = defineStore("ai", {
         ];
         this.activeSuggestionId = suggestion.id;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isRunning = false;
       }
     },
     async generateTextAlternatives(input: GenerateTextAlternativesInput) {
       this.isRunningAlternatives = true;
-      this.error = "";
+      this.error = null;
       this.textAlternatives = [];
 
       try {
         const response = await generateTextAlternatives(input);
         this.textAlternatives = response.alternatives;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isRunningAlternatives = false;
       }
     },
     async improveText(input: ImproveTextInput) {
       this.isRunningImprovements = true;
-      this.error = "";
+      this.error = null;
       this.textImprovements = [];
 
       try {
         const response = await improveText(input);
         this.textImprovements = response.improvements;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isRunningImprovements = false;
       }
     },
     async generateBibleCard(targetType: ProjectBibleCardType, keywords: string) {
       this.isRunningBible = true;
-      this.error = "";
+      this.error = null;
 
       try {
         const suggestion = await generateBibleCardFromKeywords(targetType, keywords);
@@ -366,7 +356,7 @@ export const useAiStore = defineStore("ai", {
         ];
         this.activeBibleSuggestionId = suggestion.id;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isRunningBible = false;
       }
@@ -377,7 +367,7 @@ export const useAiStore = defineStore("ai", {
       }
 
       this.isRunningBible = true;
-      this.error = "";
+      this.error = null;
 
       try {
         const suggestion = await completeBibleCardFromKeywords(targetType, targetId, keywords);
@@ -387,7 +377,21 @@ export const useAiStore = defineStore("ai", {
         ];
         this.activeBibleSuggestionId = suggestion.id;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
+      } finally {
+        this.isRunningBible = false;
+      }
+    },
+    async editBibleCard(targetType: ProjectBibleCardType, targetId: string, instruction: string) {
+      if (!targetId) return;
+      this.isRunningBible = true;
+      this.error = null;
+      try {
+        const suggestion = await editBibleCard(targetType, targetId, instruction);
+        this.bibleSuggestions = [suggestion, ...this.bibleSuggestions.filter((item) => item.id !== suggestion.id)];
+        this.activeBibleSuggestionId = suggestion.id;
+      } catch (error) {
+        this.error = normalizeUiError(error);
       } finally {
         this.isRunningBible = false;
       }
@@ -399,7 +403,7 @@ export const useAiStore = defineStore("ai", {
       }
 
       this.isSaving = true;
-      this.error = "";
+      this.error = null;
 
       try {
         const accepted = await acceptAiSuggestion(suggestion.id);
@@ -409,30 +413,30 @@ export const useAiStore = defineStore("ai", {
         this.activeSuggestionId = accepted.id;
         return accepted;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
         return null;
       } finally {
         this.isSaving = false;
       }
     },
-    async acceptActiveBibleSuggestion(draft: AiBibleCardDraft): Promise<AiBibleAcceptResult | null> {
+    async acceptActiveBibleSuggestion(draft: AiBibleCardDraft, selectedFields: AiBibleEditableField[] = []): Promise<AiBibleAcceptResult | null> {
       const suggestion = this.activeBibleSuggestion;
       if (!suggestion) {
         return null;
       }
 
       this.isSaving = true;
-      this.error = "";
+      this.error = null;
 
       try {
-        const result = await acceptAiBibleSuggestion(suggestion.id, draft);
+        const result = await acceptAiBibleSuggestion(suggestion.id, draft, selectedFields);
         this.bibleSuggestions = this.bibleSuggestions.map((item) =>
           item.id === suggestion.id ? { ...item, status: "accepted" } : item,
         );
         this.activeBibleSuggestionId = suggestion.id;
         return result;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
         return null;
       } finally {
         this.isSaving = false;
@@ -445,7 +449,7 @@ export const useAiStore = defineStore("ai", {
       }
 
       this.isSaving = true;
-      this.error = "";
+      this.error = null;
 
       try {
         const rejected = await rejectAiSuggestion(suggestion.id);
@@ -454,7 +458,7 @@ export const useAiStore = defineStore("ai", {
         );
         this.activeSuggestionId = rejected.id;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isSaving = false;
       }
@@ -466,7 +470,7 @@ export const useAiStore = defineStore("ai", {
       }
 
       this.isSaving = true;
-      this.error = "";
+      this.error = null;
 
       try {
         const rejected = await rejectAiBibleSuggestion(suggestion.id);
@@ -475,7 +479,7 @@ export const useAiStore = defineStore("ai", {
         );
         this.activeBibleSuggestionId = rejected.id;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isSaving = false;
       }

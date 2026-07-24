@@ -1,4 +1,4 @@
-import type { CommandError } from "./project";
+import type { CommandError } from "../errors";
 
 declare global {
   interface Window {
@@ -18,6 +18,6 @@ export function requireTauriRuntime() {
   throw {
     code: "tauri_unavailable",
     message:
-      "Das Desktop-Backend ist nicht verbunden. Bitte starte die App mit `npm.cmd run tauri dev`; im normalen Browser koennen keine lokalen Projektdateien angelegt oder geoeffnet werden.",
+      "Das Desktop-Backend ist nicht verbunden. Bitte starte die App mit `npm.cmd run tauri dev`; im normalen Browser können keine lokalen Projektdateien angelegt oder geöffnet werden.",
   } satisfies CommandError;
 }

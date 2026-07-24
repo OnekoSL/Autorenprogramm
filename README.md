@@ -1,75 +1,88 @@
 # Autorenprogramm
 
-Autorenprogramm ist eine lokale Windows-Desktop-App fuer komplexe Romanprojekte. Der MVP verbindet Manuskriptstruktur, Szeneneditor, Projektbibel, Suche, Export und eine optionale lokale Schreibassistenz ueber Ollama.
+[Deutsch](README.md) | [English](README.en.md)
 
-> **Frueher MVP-Teststand:** Version 0.1.0 ist ein unsigniertes Pre-release fuer freiwillige Tests. Verwende Kopien oder Testprojekte und sichere wichtige Projektdateien regelmaessig.
+Autorenprogramm ist eine lokale Windows-Desktop-App für komplexe Romanprojekte. Die Testversion 0.2.0 verbindet Manuskript, Story-Struktur, Projektbibel, Worldbuilding, Suche, Export und eine optionale lokale Schreibassistenz über Ollama.
+
+> **Frühe Testversion:** Version 0.2.0 ist ein unsigniertes Pre-release für freiwillige Tests. Verwende Kopien oder Testprojekte und sichere wichtige Projektdateien regelmäßig.
 
 ## Enthaltene Funktionen
 
-- Romanprojekte als lokale `.autorenprojekt`-Dateien anlegen und oeffnen
-- Bereiche, Kapitel und Szenen strukturieren und bearbeiten
-- Figuren, Orte, Gegenstaende und Notizen in der Projektbibel pflegen
-- Projektweite Suche sowie Markdown- und DOCX-Export
-- Projektkopien als Backup speichern
-- Optional: lokale KI fuer Schreibchat, Textverbesserung, Szenenzusammenfassung und Widerspruchspruefung
+- Lokale `.autorenprojekt`-Dateien mit unveränderlicher Projektsprache Deutsch oder britisches Englisch
+- Bereiche, Kapitel und Szenen mit Autosave, Status, Undo/Redo und frei wählbarer Reihenfolge
+- Story-Strukturen mit Akten, Beats sowie Szenen- und Figurenverknüpfungen
+- Projektbibel für Figuren, Orte, Gegenstände, Notizen, Fraktionen und Ereignisse
+- Beziehungen zwischen Projektbibel-Karten sowie verknüpfbare Weltsysteme
+- Projektweite Suche, Projektkopien und Export nach Markdown oder DOCX
+- Optionale lokale KI für Schreibchat, Textverbesserung, Szenenanalyse und Projektbibel-Vorschläge
 
-Den fachlichen Umfang beschreibt [MVP Version 1](doc/02-mvp-v1.md).
+Die Projektsprache steuert Oberfläche, eingebaute Vorlagen, Standardnamen, Dateinamen und die Standardsprache der KI. Bereits gespeicherte Nutzertexte werden niemals automatisch übersetzt.
 
 ## Systemvoraussetzungen
 
 - Windows 10 oder Windows 11, x64
 - Microsoft Edge WebView2 Runtime; Windows installiert sie normalerweise bereits
-- Fuer KI-Funktionen: [Ollama](https://ollama.com/) und mindestens ein lokal installiertes Textmodell
+- Für KI-Funktionen: [Ollama](https://ollama.com/) und mindestens ein lokal installiertes Textmodell
 
-Ollama und Modelle sind nicht Bestandteil des Installers. Alle Funktionen ausser der KI koennen ohne Ollama verwendet werden.
+Ollama und Modelle sind nicht Bestandteil des Installers. Alle Funktionen außer der KI können ohne Ollama verwendet werden.
 
 ## Installation
 
-1. Im [GitHub Release v0.1.0](https://github.com/OnekoSL/Autorenprogramm/releases/tag/v0.1.0) `Autorenprogramm_0.1.0_x64-setup.exe` und die gleichnamige `.sha256`-Datei herunterladen.
-2. Optional die SHA-256-Pruefsumme in PowerShell vergleichen:
+1. Im GitHub Pre-release `v0.2.0` die Dateien `Autorenprogramm_0.2.0_x64-setup.exe` und `Autorenprogramm_0.2.0_x64-setup.exe.sha256` herunterladen.
+2. Optional die SHA-256-Prüfsumme in PowerShell vergleichen:
 
    ```powershell
-   Get-FileHash .\Autorenprogramm_0.1.0_x64-setup.exe -Algorithm SHA256
+   Get-FileHash .\Autorenprogramm_0.2.0_x64-setup.exe -Algorithm SHA256
    ```
 
-3. Installer starten. Der MVP ist noch nicht digital signiert. Windows SmartScreen kann deshalb warnen. Nur fortfahren, wenn Dateiname, Release-Quelle und Pruefsumme stimmen; dazu gegebenenfalls **Weitere Informationen** und **Trotzdem ausfuehren** waehlen.
-4. Die Evaluierungslizenz lesen und die Installation fuer den aktuellen Benutzer abschliessen.
+3. Installer starten. Die Testversion ist noch nicht digital signiert; Windows SmartScreen kann deshalb warnen. Nur fortfahren, wenn Dateiname, Release-Quelle und Prüfsumme stimmen.
+4. Die Evaluierungslizenz lesen und die Installation für den aktuellen Benutzer abschließen.
 
 ## Erster Test
 
-1. Ein neues Projekt in einem selbst gewaehlten Ordner anlegen.
-2. Kapitel, Szenen und Projektbibel-Eintraege erstellen und miteinander verknuepfen.
-3. Unter Einstellungen regelmaessig **Projektkopie speichern** verwenden.
-4. Manuskript testweise als Markdown und DOCX exportieren.
-5. Fuer lokale KI Ollama starten, mindestens ein Modell installieren und dieses in den App-Einstellungen auswaehlen.
+1. Ein deutsches oder englisches Projekt in einem selbst gewählten Ordner anlegen.
+2. Szenen, Story-Beats, Projektbibel-Karten und ein Weltsystem erstellen und miteinander verknüpfen.
+3. Eine Projektkopie speichern und das Manuskript testweise als Markdown und DOCX exportieren.
+4. Das Projekt schließen und erneut öffnen; Texte und Projektsprache müssen unverändert bleiben.
+5. Für lokale KI Ollama starten, mindestens ein Modell installieren und dieses in den Einstellungen auswählen.
 
-Die vollstaendige Testliste steht in [TESTING.md](TESTING.md). Fehler und Feedback koennen ueber die [GitHub Issues](https://github.com/OnekoSL/Autorenprogramm/issues) gemeldet werden.
+Die vollständige Testliste steht in [TESTING.md](TESTING.md). Fehler und Feedback können über die [GitHub Issues](https://github.com/OnekoSL/Autorenprogramm/issues) gemeldet werden.
 
 ## Daten und Datenschutz
 
-Projektdateien bleiben am vom Nutzer gewaehlten Speicherort. Die App hat keine Telemetrie und keinen Cloud-Dienst. KI-Anfragen gehen ausschliesslich an Ollama unter `http://localhost:11434`; eine Eingabe von Cloud-URLs oder API-Keys ist in V0.1.0 nicht vorgesehen. Details stehen in [PRIVACY.md](PRIVACY.md).
+Projektdateien bleiben am gewählten Speicherort. Die App hat keine Telemetrie und keinen eigenen Cloud-Dienst. KI-Anfragen gehen ausschließlich an das lokale Ollama unter `http://localhost:11434`. Details stehen in [PRIVACY.md](PRIVACY.md).
 
 ## Deinstallation und Updates
 
-Die App kann ueber die Windows-Einstellungen deinstalliert werden. Selbst angelegte `.autorenprojekt`-Dateien und Exporte werden dabei nicht geloescht. V0.1.0 besitzt keinen automatischen Updater; neue Testversionen werden als separate GitHub Releases bereitgestellt.
+Die App kann über die Windows-Einstellungen deinstalliert werden. Selbst angelegte Projektdateien und Exporte werden dabei nicht gelöscht. Version 0.2.0 besitzt keinen automatischen Updater; neue Testversionen werden als separate GitHub Pre-releases bereitgestellt.
 
 ## Entwicklung
 
-Vorausgesetzt werden Node.js, Rust und die [Tauri-Voraussetzungen fuer Windows](https://v2.tauri.app/start/prerequisites/).
+Vorausgesetzt werden Node.js, Rust und die [Tauri-Voraussetzungen für Windows](https://v2.tauri.app/start/prerequisites/).
 
 ```powershell
 npm.cmd ci
 npm.cmd run tauri dev
 ```
 
-Pruefungen und lokaler Installer-Build:
+Automatische Prüfungen:
 
 ```powershell
+npm.cmd run check:version
+npm.cmd run check:i18n
+npm.cmd run test:coverage
 npm.cmd run build
+cargo fmt --check --manifest-path src-tauri/Cargo.toml
+cargo clippy --locked --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
 cargo test --locked --manifest-path src-tauri/Cargo.toml
+```
+
+Lokaler Installer-Build:
+
+```powershell
 npx.cmd tauri build --bundles nsis
 ```
 
 ## Lizenz
 
-Der Quellcode ist sichtbar, aber nicht Open Source. Er darf ausschliesslich gemaess der [Autorenprogramm-Evaluierungslizenz](LICENSE.md) genutzt werden. Copyright (c) 2026 OnekoSL.
+Der Quellcode ist sichtbar, aber nicht Open Source. Er darf ausschließlich gemäß der [Autorenprogramm-Evaluierungslizenz](LICENSE.md) genutzt werden. Copyright © 2026 OnekoSL.

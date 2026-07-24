@@ -1,18 +1,25 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
+import { setLocale, type ProjectLanguage } from "../i18n";
+import { formatUiError, uiError, type UiError } from "../errors";
 import { chooseProjectOpenPath, chooseProjectSavePath } from "../api/project";
 import { isTauriRuntime } from "../api/tauri";
 import { useProjectStore } from "../stores/project";
 
 const projectStore = useProjectStore();
+const { t } = useI18n();
 const projectName = ref("");
 const description = ref("");
-const defaultLanguage = ref("de");
+const defaultLanguage = ref<ProjectLanguage>("de");
+watch(defaultLanguage, (language) => setLocale(language), { immediate: true });
 const projectPath = ref("");
-const localError = ref("");
+const localError = ref<UiError | null>(null);
 const hasDesktopBackend = computed(() => isTauriRuntime());
-const desktopBackendMessage =
-  "Desktop-Backend nicht verbunden. Bitte starte die App mit `npm.cmd run tauri dev`; im normalen Browser koennen keine lokalen Projektdateien angelegt oder geoeffnet werden.";
+const startError = computed(
+  () => localError.value ?? projectStore.error ?? (!hasDesktopBackend.value ? uiError("tauri_unavailable") : null),
+);
+const startErrorText = computed(() => formatUiError(startError.value));
 
 const canCreateProject = computed(
   () => hasDesktopBackend.value && projectName.value.trim().length > 0 && !projectStore.isLoading,
@@ -20,14 +27,15 @@ const canCreateProject = computed(
 
 function projectFileName() {
   const normalized = projectName.value.trim().replace(/[<>:"/\\|?*]+/g, "-");
-  return normalized || "Neues Projekt";
+  const baseName = normalized || t("start.defaultName");
+  return `${baseName} - ${t("files.project")}`;
 }
 
 async function chooseSavePath() {
-  localError.value = "";
+  localError.value = null;
 
   if (!hasDesktopBackend.value) {
-    localError.value = desktopBackendMessage;
+    localError.value = uiError("tauri_unavailable");
     return;
   }
 
@@ -39,15 +47,15 @@ async function chooseSavePath() {
 }
 
 async function createProject() {
-  localError.value = "";
+  localError.value = null;
 
   if (!hasDesktopBackend.value) {
-    localError.value = desktopBackendMessage;
+    localError.value = uiError("tauri_unavailable");
     return;
   }
 
   if (!projectName.value.trim()) {
-    localError.value = "Bitte gib einen Projektnamen ein.";
+    localError.value = uiError("invalid_project_name");
     return;
   }
 
@@ -69,10 +77,10 @@ async function createProject() {
 }
 
 async function chooseOpenPath() {
-  localError.value = "";
+  localError.value = null;
 
   if (!hasDesktopBackend.value) {
-    localError.value = desktopBackendMessage;
+    localError.value = uiError("tauri_unavailable");
     return;
   }
 
@@ -86,55 +94,61 @@ async function chooseOpenPath() {
 
 <template>
   <main class="project-start">
-    <section class="project-start-panel" aria-label="Projektstart">
+    <section class="project-start-panel" :aria-label="t('project.start')">
       <header>
         <p class="eyebrow">Autorenprogramm</p>
-        <h1>Projektstart</h1>
+        <h1>{{ t("project.start") }}</h1>
       </header>
 
       <section class="start-grid">
         <form class="new-project" @submit.prevent="createProject">
           <div class="section-heading">
-            <h2>Neues Projekt</h2>
-            <span>Lokal</span>
+            <h2>{{ t("project.new") }}</h2>
+            <span>{{ t("project.local") }}</span>
           </div>
 
           <label>
-            <span>Projektname</span>
-            <input v-model="projectName" autocomplete="off" placeholder="Die Chroniken von Eldara" />
+            <span>{{ t("project.name") }}</span>
+            <input v-model="projectName" autocomplete="off" :placeholder="t('start.namePlaceholder')" />
           </label>
 
           <label>
-            <span>Beschreibung</span>
-            <textarea v-model="description" placeholder="Kurze Orientierung fuer das Projekt." />
+            <span>{{ t("project.description") }}</span>
+            <textarea v-model="description" :placeholder="t('start.descriptionPlaceholder')" />
           </label>
 
           <label>
-            <span>Standardsprache</span>
+            <span>{{ t("project.language") }}</span>
             <select v-model="defaultLanguage">
-              <option value="de">Deutsch</option>
-              <option value="en">Englisch</option>
+              <option value="de">{{ t("project.german") }}</option>
+              <option value="en">{{ t("project.english") }}</option>
             </select>
           </label>
 
+          <div class="project-default-info">
+            <span>{{ t("project.defaultStructure") }}</span>
+            <strong>{{ projectStore.projectDefaults?.storyStructureTemplateName || t("start.freeStructure") }}</strong>
+            <small>{{ t("project.appliedAutomatically") }}</small>
+          </div>
+
           <label>
-            <span>Speicherort</span>
-            <input v-model="projectPath" readonly placeholder="Noch kein Speicherort gewaehlt" />
+            <span>{{ t("project.location") }}</span>
+            <input v-model="projectPath" readonly :placeholder="t('project.noLocation')" />
           </label>
 
           <div class="start-actions">
             <button type="button" :disabled="!hasDesktopBackend" @click="chooseSavePath">
-              Speicherort auswaehlen
+              {{ t("project.choose") }}
             </button>
             <button type="submit" class="primary-action" :disabled="!canCreateProject">
-              Projekt anlegen
+              {{ t("project.create") }}
             </button>
           </div>
         </form>
 
-        <section class="open-project" aria-label="Projekt oeffnen">
+        <section class="open-project" :aria-label="t('project.open')">
           <div class="section-heading">
-            <h2>Zuletzt geoeffnet</h2>
+            <h2>{{ t("project.recent") }}</h2>
             <span>{{ projectStore.recentProjects.length }}</span>
           </div>
 
@@ -145,27 +159,27 @@ async function chooseOpenPath() {
                 <p>{{ project.path }}</p>
               </div>
               <div class="recent-actions">
-                <button type="button" @click="projectStore.openProject(project.path)">Oeffnen</button>
+                <button type="button" @click="projectStore.openProject(project.path)">{{ t("common.open") }}</button>
                 <button type="button" @click="projectStore.removeRecentProject(project.path)">
-                  Entfernen
+                  {{ t("project.remove") }}
                 </button>
               </div>
             </article>
           </div>
 
-          <p v-else class="empty-state">Noch keine zuletzt geoeffneten Projekte.</p>
+          <p v-else class="empty-state">{{ t("project.noRecent") }}</p>
 
           <div class="local-file">
-            <h2>Lokale Projektdatei</h2>
+            <h2>{{ t("project.localFile") }}</h2>
             <button type="button" :disabled="!hasDesktopBackend" @click="chooseOpenPath">
-              Projektdatei oeffnen
+              {{ t("project.open") }}
             </button>
           </div>
         </section>
       </section>
 
-      <p v-if="!hasDesktopBackend || localError || projectStore.error" class="error-message">
-        {{ localError || projectStore.error || desktopBackendMessage }}
+      <p v-if="startError" class="error-message">
+        {{ startErrorText }}
       </p>
     </section>
   </main>
@@ -241,6 +255,21 @@ async function chooseOpenPath() {
 
 .new-project textarea {
   height: 96px;
+}
+
+.project-default-info {
+  display: grid;
+  gap: 3px;
+  border: 1px solid #d7d2c7;
+  border-radius: 6px;
+  background: #f3f6f3;
+  padding: 10px 12px;
+}
+
+.project-default-info span,
+.project-default-info small {
+  color: #66736c;
+  font-size: 12px;
 }
 
 .start-actions,

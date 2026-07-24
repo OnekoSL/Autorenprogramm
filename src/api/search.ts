@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import { requireTauriRuntime } from "./tauri";
-import type { ProjectBibleCardType } from "./projectBible";
+import type { KnowledgeTargetType } from "./projectBible";
 
 export type SearchScope = "all" | "scenes" | "bible";
 
@@ -12,7 +12,7 @@ export interface SearchProjectResult {
   matchedFields: string[];
   snippets: string[];
   sceneId?: string | null;
-  targetType?: ProjectBibleCardType | null;
+  targetType?: KnowledgeTargetType | null;
   targetId?: string | null;
 }
 

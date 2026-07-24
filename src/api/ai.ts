@@ -59,6 +59,7 @@ export interface TextImprovementsResponse {
 
 export interface AiProviderStatus {
   state: AiProviderState;
+  code: AiProviderState;
   message: string;
   canStart: boolean;
   baseUrl: string;
@@ -86,7 +87,8 @@ export interface AiSuggestionSnapshot {
   deletedAt?: string | null;
 }
 
-export type AiBibleSuggestionMode = "generate" | "complete";
+export type AiBibleSuggestionMode = "generate" | "complete" | "edit";
+export type AiBibleEditableField = "name" | "role" | "description" | "notes" | "title" | "body" | "noteType";
 
 export interface AiBibleCardDraft {
   name: string;
@@ -106,6 +108,8 @@ export interface AiBibleSuggestionSnapshot {
   mode: AiBibleSuggestionMode;
   keywords: string;
   draft: AiBibleCardDraft;
+  sourceDraft?: AiBibleCardDraft | null;
+  targetUpdatedAt?: string | null;
   status: AiSuggestionStatus;
   createdAt: string;
   updatedAt: string;
@@ -206,6 +210,17 @@ export function completeBibleCardFromKeywords(
   });
 }
 
+export function editBibleCard(
+  targetType: ProjectBibleCardType,
+  targetId: string,
+  instruction: string,
+): Promise<AiBibleSuggestionSnapshot> {
+  requireTauriRuntime();
+  return invoke<AiBibleSuggestionSnapshot>("edit_bible_card", {
+    input: { targetType, targetId, instruction },
+  });
+}
+
 export function listAiBibleSuggestions(
   targetType?: ProjectBibleCardType,
   targetId?: string,
@@ -219,9 +234,10 @@ export function listAiBibleSuggestions(
 export function acceptAiBibleSuggestion(
   id: string,
   draft: AiBibleCardDraft,
+  selectedFields: AiBibleEditableField[] = [],
 ): Promise<AiBibleAcceptResult> {
   requireTauriRuntime();
-  return invoke<AiBibleAcceptResult>("accept_ai_bible_suggestion", { input: { id, draft } });
+  return invoke<AiBibleAcceptResult>("accept_ai_bible_suggestion", { input: { id, draft, selectedFields } });
 }
 
 export function rejectAiBibleSuggestion(id: string): Promise<AiBibleSuggestionSnapshot> {

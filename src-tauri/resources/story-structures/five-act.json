@@ -1,0 +1,196 @@
+{
+    "formatVersion":  1,
+    "id":  "five-act",
+    "name":  "Fünfaktstruktur",
+    "description":  "Feingliedrige Dramaturgie für komplexe Konflikte und Konsequenzen.",
+    "category":  "plot",
+    "tags":  [
+                 "komplex",
+                 "drama"
+             ],
+    "acts":  [
+                 {
+                     "id":  "introduction",
+                     "title":  "Akt 1: Einführung",
+                     "description":  "Ausgangslage und Konflikt werden gesetzt.",
+                     "order":  0,
+                     "beats":  [
+                                   {
+                                       "id":  "exposition",
+                                       "title":  "Exposition",
+                                       "description":  "Welt, Figuren und Spannungen werden eingeführt.",
+                                       "guidingQuestions":  [
+                                                                "Welche Ordnung herrscht zu Beginn?",
+                                                                "Wo liegt bereits Spannung?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  0,
+                                       "suggestedPercentageEnd":  10,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "trigger",
+                                       "title":  "Auslöser",
+                                       "description":  "Der zentrale Konflikt wird in Bewegung gesetzt.",
+                                       "guidingQuestions":  [
+                                                                "Was stört die Ordnung?",
+                                                                "Wer muss darauf reagieren?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  10,
+                                       "suggestedPercentageEnd":  20,
+                                       "order":  1
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "rise",
+                     "title":  "Akt 2: Steigende Handlung",
+                     "description":  "Handlungen und Gegenhandlungen verschärfen den Konflikt.",
+                     "order":  1,
+                     "beats":  [
+                                   {
+                                       "id":  "complication",
+                                       "title":  "Verwicklung",
+                                       "description":  "Der erste Plan erzeugt neue Schwierigkeiten.",
+                                       "guidingQuestions":  [
+                                                                "Welche Folge wurde unterschätzt?",
+                                                                "Wer gewinnt dadurch Einfluss?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  20,
+                                       "suggestedPercentageEnd":  32,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "escalation",
+                                       "title":  "Eskalation",
+                                       "description":  "Der Spielraum der Figuren wird enger.",
+                                       "guidingQuestions":  [
+                                                                "Welche Optionen fallen weg?",
+                                                                "Wie steigen die persönlichen Kosten?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  32,
+                                       "suggestedPercentageEnd":  40,
+                                       "order":  1
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "center",
+                     "title":  "Akt 3: Zentrale Wendung",
+                     "description":  "Der Konflikt erreicht Höhepunkt oder entscheidende Umkehr.",
+                     "order":  2,
+                     "beats":  [
+                                   {
+                                       "id":  "reversal",
+                                       "title":  "Zentrale Enthüllung",
+                                       "description":  "Eine Wahrheit verändert die Bedeutung des bisherigen Geschehens.",
+                                       "guidingQuestions":  [
+                                                                "Welche Annahme war falsch?",
+                                                                "Wer erkennt die Wahrheit zuerst?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  40,
+                                       "suggestedPercentageEnd":  50,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "high-point",
+                                       "title":  "Zentraler Höhepunkt",
+                                       "description":  "Die Kräfte treffen in einer vorläufigen Entscheidung aufeinander.",
+                                       "guidingQuestions":  [
+                                                                "Was scheint entschieden?",
+                                                                "Welche Konsequenz wird ausgelöst?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  50,
+                                       "suggestedPercentageEnd":  60,
+                                       "order":  1
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "fall",
+                     "title":  "Akt 4: Fallende Handlung",
+                     "description":  "Die Folgen der Wendung fuehren in die Krise.",
+                     "order":  3,
+                     "beats":  [
+                                   {
+                                       "id":  "consequences",
+                                       "title":  "Konsequenzen",
+                                       "description":  "Erfolge und Fehler fordern ihren Preis.",
+                                       "guidingQuestions":  [
+                                                                "Wer bezahlt für die Wendung?",
+                                                                "Welche Beziehung verändert sich?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  60,
+                                       "suggestedPercentageEnd":  72,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "lowest-point",
+                                       "title":  "Tiefpunkt",
+                                       "description":  "Die bisherige Strategie ist erschöpft.",
+                                       "guidingQuestions":  [
+                                                                "Was scheint verloren?",
+                                                                "Welche innere Entscheidung fehlt noch?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  72,
+                                       "suggestedPercentageEnd":  80,
+                                       "order":  1
+                                   }
+                               ]
+                 },
+                 {
+                     "id":  "finale",
+                     "title":  "Akt 5: Finale und Auflösung",
+                     "description":  "Der Konflikt wird abschließend entschieden.",
+                     "order":  4,
+                     "beats":  [
+                                   {
+                                       "id":  "final-decision",
+                                       "title":  "Letzte Entscheidung",
+                                       "description":  "Die Hauptfigur wählt ihren endgültigen Weg.",
+                                       "guidingQuestions":  [
+                                                                "Was hat sie gelernt?",
+                                                                "Welches Opfer akzeptiert sie?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  80,
+                                       "suggestedPercentageEnd":  88,
+                                       "order":  0
+                                   },
+                                   {
+                                       "id":  "climax",
+                                       "title":  "Finale",
+                                       "description":  "Die entscheidende Konfrontation löst den Hauptkonflikt.",
+                                       "guidingQuestions":  [
+                                                                "Wie zeigt sich das zentrale Thema?",
+                                                                "Warum kann nur dieser Ausgang folgen?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  88,
+                                       "suggestedPercentageEnd":  96,
+                                       "order":  1
+                                   },
+                                   {
+                                       "id":  "resolution",
+                                       "title":  "Auflösung",
+                                       "description":  "Die neue Ordnung und offene Folgen werden gezeigt.",
+                                       "guidingQuestions":  [
+                                                                "Was bleibt verändert?",
+                                                                "Welche Frage darf offenbleiben?"
+                                                            ],
+                                       "required":  true,
+                                       "suggestedPercentageStart":  96,
+                                       "suggestedPercentageEnd":  100,
+                                       "order":  2
+                                   }
+                               ]
+                 }
+             ]
+}

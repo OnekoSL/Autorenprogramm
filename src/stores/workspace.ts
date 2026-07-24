@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 
-export type WorkspaceSection = "writing" | "bible" | "search" | "export" | "ai" | "settings";
-export type SidebarTab = "context" | "bible" | "ai";
+export type WorkspaceSection = "writing" | "bible" | "structure" | "worldbuilding" | "search" | "export" | "ai" | "settings";
+export type SidebarTab = "context" | "bible" | "world" | "ai";
+export type WorldSidebarTab = "guidance" | "scenes" | "relationships";
 export type LayoutPanel = "navigator" | "sidebar";
 
 export interface WorkspaceLayout {
@@ -18,6 +19,7 @@ export const useWorkspaceStore = defineStore("workspace", {
   state: () => ({
     activeSection: "writing" as WorkspaceSection,
     sidebarTab: "context" as SidebarTab,
+    worldSidebarTab: "guidance" as WorldSidebarTab,
     layout: { ...defaultWorkspaceLayout },
   }),
   actions: {
@@ -27,6 +29,7 @@ export const useWorkspaceStore = defineStore("workspace", {
     setSidebarTab(tab: SidebarTab) {
       this.sidebarTab = tab;
     },
+    setWorldSidebarTab(tab: WorldSidebarTab) { this.worldSidebarTab = tab; },
     setPanelWidth(panel: LayoutPanel, width: number) {
       this.layout[panel] = width;
     },

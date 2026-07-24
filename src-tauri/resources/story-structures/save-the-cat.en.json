@@ -1,0 +1,232 @@
+{
+  "formatVersion": 1,
+  "id": "save-the-cat",
+  "name": "Save the Cat Beatsheet",
+  "description": "Precise beatsheet with fifteen stations for a clearly guided story arc.",
+  "category": "plot",
+  "tags": [
+    "beatsheet",
+    "orientation"
+  ],
+  "acts": [
+    {
+      "id": "act-one",
+      "title": "Act 1: Setup",
+      "description": "Starting world, topic and decision to leave.",
+      "order": 0,
+      "beats": [
+        {
+          "id": "opening-image",
+          "title": "Opening image",
+          "description": "A concentrated image conveys tone and initial state.",
+          "guidingQuestions": [
+            "Which picture summarizes the initial situation?",
+            "What contrast should the final image form?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 0,
+          "suggestedPercentageEnd": 2,
+          "order": 0
+        },
+        {
+          "id": "theme-stated",
+          "title": "Theme is hinted at",
+          "description": "A question or statement indicates the necessary knowledge.",
+          "guidingQuestions": [
+            "What truth does the main character have to learn?",
+            "Who pronounces them?"
+          ],
+          "required": false,
+          "suggestedPercentageStart": 4,
+          "suggestedPercentageEnd": 7,
+          "order": 1
+        },
+        {
+          "id": "setup",
+          "title": "Set up",
+          "description": "Everyday life, relationships, shortcomings and goals are established.",
+          "guidingQuestions": [
+            "What isn't working in the character's life?",
+            "Which elements must return later?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 1,
+          "suggestedPercentageEnd": 10,
+          "order": 2
+        },
+        {
+          "id": "catalyst",
+          "title": "trigger",
+          "description": "An event disrupts everyday life.",
+          "guidingQuestions": [
+            "What cannot be undone?",
+            "Why does it affect this character in particular?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 9,
+          "suggestedPercentageEnd": 12,
+          "order": 3
+        },
+        {
+          "id": "debate",
+          "title": "Doubt",
+          "description": "The main character struggles with the risk and consequences of departure.",
+          "guidingQuestions": [
+            "What legitimate fear exists?",
+            "What makes doing nothing impossible?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 10,
+          "suggestedPercentageEnd": 20,
+          "order": 4
+        },
+        {
+          "id": "break-two",
+          "title": "Transition to Act 2",
+          "description": "An active decision leads to a new world of action.",
+          "guidingQuestions": [
+            "What choice does the character make?",
+            "How does the direction of the story change?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 19,
+          "suggestedPercentageEnd": 22,
+          "order": 5
+        }
+      ]
+    },
+    {
+      "id": "act-two",
+      "title": "Act 2: Confrontation",
+      "description": "Promise, subplot, reversal and increasing pressure.",
+      "order": 1,
+      "beats": [
+        {
+          "id": "b-story",
+          "title": "Subplot",
+          "description": "A second relationship or action reflects the theme.",
+          "guidingQuestions": [
+            "Who shows a different view on the topic?",
+            "How does this affect the main conflict?"
+          ],
+          "required": false,
+          "suggestedPercentageStart": 21,
+          "suggestedPercentageEnd": 28,
+          "order": 0
+        },
+        {
+          "id": "fun-games",
+          "title": "fun and games",
+          "description": "The central promise of the story unfolds in successes and problems.",
+          "guidingQuestions": [
+            "Which expectations of the genre are fulfilled?",
+            "What does the character learn through action?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 22,
+          "suggestedPercentageEnd": 48,
+          "order": 1
+        },
+        {
+          "id": "midpoint",
+          "title": "Center point",
+          "description": "An apparent win or loss increases stakes and time pressure.",
+          "guidingQuestions": [
+            "What changes the meaning of the goal?",
+            "How does the stakes increase?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 48,
+          "suggestedPercentageEnd": 52,
+          "order": 2
+        },
+        {
+          "id": "bad-guys-close-in",
+          "title": "The net is closing",
+          "description": "External opponents and internal mistakes narrow the possibilities.",
+          "guidingQuestions": [
+            "Which forces are gaining ground?",
+            "What internal flaw is making the situation worse?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 52,
+          "suggestedPercentageEnd": 72,
+          "order": 3
+        },
+        {
+          "id": "all-is-lost",
+          "title": "Everything is lost",
+          "description": "A serious loss destroys the previous plan.",
+          "guidingQuestions": [
+            "What is visibly lost?",
+            "Why is the old strategy failing?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 72,
+          "suggestedPercentageEnd": 77,
+          "order": 4
+        },
+        {
+          "id": "dark-night",
+          "title": "Dark night of the soul",
+          "description": "The character deals with the rock bottom and finds a new truth.",
+          "guidingQuestions": [
+            "What truth is finally accepted?",
+            "What gives new courage?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 75,
+          "suggestedPercentageEnd": 80,
+          "order": 5
+        },
+        {
+          "id": "break-three",
+          "title": "Transition to Act 3",
+          "description": "The main and subplots combine to form a new plan.",
+          "guidingQuestions": [
+            "What insights are combined?",
+            "Why can the new plan work?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 79,
+          "suggestedPercentageEnd": 82,
+          "order": 6
+        }
+      ]
+    },
+    {
+      "id": "act-three",
+      "title": "Act 3: Finale",
+      "description": "The new plan is implemented and the issue is proven.",
+      "order": 2,
+      "beats": [
+        {
+          "id": "finale",
+          "title": "final",
+          "description": "The character overcomes resistance through his completed development.",
+          "guidingQuestions": [
+            "How does the finale test the new stance?",
+            "What order emerges?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 80,
+          "suggestedPercentageEnd": 99,
+          "order": 0
+        },
+        {
+          "id": "final-image",
+          "title": "Final picture",
+          "description": "A final picture shows the change compared to the beginning.",
+          "guidingQuestions": [
+            "What is visibly different?",
+            "What emotional note remains?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 98,
+          "suggestedPercentageEnd": 100,
+          "order": 1
+        }
+      ]
+    }
+  ]
+}

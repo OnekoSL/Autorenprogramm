@@ -1,55 +1,57 @@
 import { defineStore } from "pinia";
+import { i18n, localeCode } from "../i18n";
+import { normalizeUiError, type UiError } from "../errors";
 import {
   createProjectBibleCard,
   deleteProjectBibleCard,
   getProjectBible,
   replaceSceneLinksForCard,
   updateProjectBibleCard,
+  upsertBibleRelationship,
+  deleteBibleRelationship,
+  reorderBibleEvents,
   type CharacterSnapshot,
   type ItemSnapshot,
   type LocationSnapshot,
   type NoteSnapshot,
+  type FactionSnapshot,
+  type EventSnapshot,
+  type BibleRelationshipUpdate,
   type NoteType,
   type ProjectBibleCardType,
+  type KnowledgeTargetType,
   type ProjectBibleCardUpdate,
   type ProjectBibleSnapshot,
   type SceneLinkSnapshot,
 } from "../api/projectBible";
-import type { CommandError } from "../api/project";
+import type { WorldSystemSnapshot } from "../api/worldbuilding";
 
 export type ProjectBibleCard =
   | (CharacterSnapshot & { targetType: "character"; title: string; subtitle: string })
   | (LocationSnapshot & { targetType: "location"; title: string; subtitle: string })
   | (ItemSnapshot & { targetType: "item"; title: string; subtitle: string })
-  | (NoteSnapshot & { targetType: "note"; name: string; subtitle: string });
+  | (NoteSnapshot & { targetType: "note"; name: string; subtitle: string })
+  | (FactionSnapshot & { targetType: "faction"; title: string; subtitle: string })
+  | (EventSnapshot & { targetType: "event"; name: string; subtitle: string });
 
-export const projectBibleCardTypes: Array<{ id: ProjectBibleCardType; label: string }> = [
-  { id: "character", label: "Figuren" },
-  { id: "location", label: "Orte" },
-  { id: "item", label: "Gegenstaende" },
-  { id: "note", label: "Notizen" },
+export type KnowledgeCard = ProjectBibleCard
+  | (WorldSystemSnapshot & { targetType: "world_system"; title: string; subtitle: string });
+
+export const projectBibleCardTypes: Array<{ id: ProjectBibleCardType; labelKey: string }> = [
+  { id: "character", labelKey: "bible.types.character" },
+  { id: "location", labelKey: "bible.types.location" },
+  { id: "item", labelKey: "bible.types.item" },
+  { id: "note", labelKey: "bible.types.note" },
+  { id: "faction", labelKey: "bible.types.faction" },
+  { id: "event", labelKey: "bible.types.event" },
 ];
 
-export const noteTypes: Array<{ id: NoteType; label: string }> = [
-  { id: "general", label: "Allgemein" },
-  { id: "research", label: "Recherche" },
-  { id: "lore", label: "Lore" },
-  { id: "faction", label: "Fraktion" },
-  { id: "event", label: "Ereignis" },
-  { id: "todo", label: "Todo" },
+export const noteTypes: Array<{ id: NoteType; labelKey: string }> = [
+  { id: "general", labelKey: "bible.noteTypes.general" },
+  { id: "research", labelKey: "bible.noteTypes.research" },
+  { id: "lore", labelKey: "bible.noteTypes.lore" },
+  { id: "todo", labelKey: "bible.noteTypes.todo" },
 ];
-
-function normalizeError(error: unknown) {
-  if (typeof error === "object" && error && "message" in error) {
-    return (error as CommandError).message;
-  }
-
-  if (typeof error === "string") {
-    return error;
-  }
-
-  return "Die Projektbibel-Aktion ist fehlgeschlagen.";
-}
 
 function cardsForType(
   snapshot: ProjectBibleSnapshot | null,
@@ -86,11 +88,13 @@ function cardsForType(
     }));
   }
 
+  if (type === "faction") return snapshot.factions.map((card) => ({ ...card, targetType: "faction", title: card.name, subtitle: card.factionType || card.description }));
+  if (type === "event") return snapshot.events.map((card) => ({ ...card, targetType: "event", name: card.title, subtitle: card.timeLabel || card.summary }));
   return snapshot.notes.map((card) => ({
     ...card,
     targetType: "note",
     name: card.title,
-    subtitle: noteTypes.find((noteType) => noteType.id === card.noteType)?.label ?? card.noteType,
+    subtitle: i18n.global.t(noteTypes.find((noteType) => noteType.id === card.noteType)?.labelKey ?? card.noteType),
   }));
 }
 
@@ -106,22 +110,22 @@ export const useProjectBibleStore = defineStore("projectBible", {
     searchQuery: "",
     isLoading: false,
     isSaving: false,
-    error: "",
+    error: null as UiError | null,
   }),
   getters: {
     cards(state): ProjectBibleCard[] {
       return cardsForType(state.snapshot, state.activeCardType);
     },
     filteredCards(): ProjectBibleCard[] {
-      const query = this.searchQuery.trim().toLocaleLowerCase();
+      const query = this.searchQuery.trim().toLocaleLowerCase(localeCode());
       if (!query) {
         return this.cards;
       }
 
       return this.cards.filter((card) =>
-        [card.title, card.subtitle, "description" in card ? card.description : "", "body" in card ? card.body : ""]
+        [card.title, card.subtitle, "description" in card ? card.description : "", "body" in card ? card.body : "", "goals" in card ? card.goals : "", "summary" in card ? card.summary : "", "outcome" in card ? card.outcome : "", "notes" in card ? card.notes : ""]
           .join(" ")
-          .toLocaleLowerCase()
+          .toLocaleLowerCase(localeCode())
           .includes(query),
       );
     },
@@ -138,13 +142,17 @@ export const useProjectBibleStore = defineStore("projectBible", {
           link.targetType === state.activeCardType && link.targetId === state.selectedCardId,
       );
     },
+    selectedCardRelationships(state) {
+      if (!state.snapshot || !state.selectedCardId) return [];
+      return state.snapshot.relationships.filter((item) => (item.sourceType === state.activeCardType && item.sourceId === state.selectedCardId) || (item.targetType === state.activeCardType && item.targetId === state.selectedCardId));
+    },
   },
   actions: {
     reset() {
       this.snapshot = null;
       this.selectedCardId = "";
       this.searchQuery = "";
-      this.error = "";
+      this.error = null;
     },
     setSnapshot(snapshot: ProjectBibleSnapshot, preferredCardId?: string) {
       this.snapshot = snapshot;
@@ -166,12 +174,12 @@ export const useProjectBibleStore = defineStore("projectBible", {
     },
     async load() {
       this.isLoading = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.setSnapshot(await getProjectBible());
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isLoading = false;
       }
@@ -181,7 +189,7 @@ export const useProjectBibleStore = defineStore("projectBible", {
       const beforeIds = allCardIds(this.snapshot, targetType);
       this.activeCardType = targetType;
       this.isSaving = true;
-      this.error = "";
+      this.error = null;
 
       try {
         const snapshot = await createProjectBibleCard(targetType);
@@ -189,7 +197,7 @@ export const useProjectBibleStore = defineStore("projectBible", {
         this.setSnapshot(snapshot, newCard?.id);
         return newCard ?? null;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
         return null;
       } finally {
         this.isSaving = false;
@@ -197,12 +205,14 @@ export const useProjectBibleStore = defineStore("projectBible", {
     },
     async updateCard(input: ProjectBibleCardUpdate) {
       this.isSaving = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.setSnapshot(await updateProjectBibleCard(input), input.id);
+        return true;
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
+        return false;
       } finally {
         this.isSaving = false;
       }
@@ -214,12 +224,12 @@ export const useProjectBibleStore = defineStore("projectBible", {
       }
 
       this.isSaving = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.setSnapshot(await deleteProjectBibleCard(card.targetType, card.id));
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isSaving = false;
       }
@@ -231,17 +241,17 @@ export const useProjectBibleStore = defineStore("projectBible", {
       }
 
       this.isSaving = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.setSnapshot(await replaceSceneLinksForCard(card.targetType, card.id, sceneIds), card.id);
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isSaving = false;
       }
     },
-    async addSceneLinkToCard(targetType: ProjectBibleCardType, targetId: string, sceneId: string) {
+    async addSceneLinkToCard(targetType: KnowledgeTargetType, targetId: string, sceneId: string) {
       if (!sceneId) {
         return;
       }
@@ -252,18 +262,44 @@ export const useProjectBibleStore = defineStore("projectBible", {
           .map((link) => link.sceneId) ?? [],
       );
       sceneIds.add(sceneId);
-      this.activeCardType = targetType;
-      this.selectedCardId = targetId;
+      if (targetType !== "world_system") {
+        this.activeCardType = targetType;
+        this.selectedCardId = targetId;
+      }
       this.isSaving = true;
-      this.error = "";
+      this.error = null;
 
       try {
         this.setSnapshot(await replaceSceneLinksForCard(targetType, targetId, [...sceneIds]), targetId);
       } catch (error) {
-        this.error = normalizeError(error);
+        this.error = normalizeUiError(error);
       } finally {
         this.isSaving = false;
       }
+    },
+    async replaceCardSceneLinks(targetType: KnowledgeTargetType, targetId: string, sceneIds: string[]) {
+      this.isSaving = true; this.error = null;
+      try { this.setSnapshot(await replaceSceneLinksForCard(targetType, targetId, sceneIds)); }
+      catch (error) { this.error = normalizeUiError(error); }
+      finally { this.isSaving = false; }
+    },
+    async saveRelationship(input: BibleRelationshipUpdate) {
+      this.isSaving = true; this.error = null;
+      try { this.setSnapshot(await upsertBibleRelationship(input), this.selectedCardId); return true; }
+      catch (error) { this.error = normalizeUiError(error); return false; }
+      finally { this.isSaving = false; }
+    },
+    async removeRelationship(id: string) {
+      this.isSaving = true; this.error = null;
+      try { this.setSnapshot(await deleteBibleRelationship(id), this.selectedCardId); }
+      catch (error) { this.error = normalizeUiError(error); }
+      finally { this.isSaving = false; }
+    },
+    async reorderEvents(eventIds: string[]) {
+      this.isSaving = true; this.error = null;
+      try { this.setSnapshot(await reorderBibleEvents(eventIds), this.selectedCardId); }
+      catch (error) { this.error = normalizeUiError(error); }
+      finally { this.isSaving = false; }
     },
   },
 });

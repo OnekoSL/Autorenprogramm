@@ -1,0 +1,194 @@
+{
+  "formatVersion": 1,
+  "id": "mystery",
+  "name": "Mystery structure",
+  "description": "Genre-specific structure for puzzles, traces, wrong paths and resolution.",
+  "category": "genre",
+  "tags": [
+    "crime",
+    "mystery",
+    "determination"
+  ],
+  "acts": [
+    {
+      "id": "case",
+      "title": "The case begins",
+      "description": "Puzzles, first impressions and direction of investigation are established.",
+      "order": 0,
+      "beats": [
+        {
+          "id": "crime",
+          "title": "Crime or mystery",
+          "description": "An unexplained event creates the central question.",
+          "guidingQuestions": [
+            "What question needs to be answered?",
+            "What is at stake for those affected?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 0,
+          "suggestedPercentageEnd": 8,
+          "order": 0
+        },
+        {
+          "id": "first-impression",
+          "title": "First impression",
+          "description": "The visible location suggests a preliminary interpretation.",
+          "guidingQuestions": [
+            "What seems obvious?",
+            "What information is missing?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 5,
+          "suggestedPercentageEnd": 12,
+          "order": 1
+        },
+        {
+          "id": "first-clue",
+          "title": "First lead",
+          "description": "A concrete tip opens the active investigation.",
+          "guidingQuestions": [
+            "Where does the trail apparently lead?",
+            "Who wants to devalue them?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 10,
+          "suggestedPercentageEnd": 18,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "investigation",
+      "title": "Investigation and misdirection",
+      "description": "New clues expand the case and create a false sense of security.",
+      "order": 1,
+      "beats": [
+        {
+          "id": "false-assumption",
+          "title": "Wrong assumption",
+          "description": "A plausible interpretation steers the investigation in the wrong direction.",
+          "guidingQuestions": [
+            "Why is the assumption credible?",
+            "What detail does she already disagree with?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 18,
+          "suggestedPercentageEnd": 28,
+          "order": 0
+        },
+        {
+          "id": "suspects",
+          "title": "New suspects",
+          "description": "Motives and opportunities expand the circle of possible responsible parties.",
+          "guidingQuestions": [
+            "Who benefits from the event?",
+            "Which mysteries are not the solution you are looking for?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 25,
+          "suggestedPercentageEnd": 40,
+          "order": 1
+        },
+        {
+          "id": "contradiction",
+          "title": "contradiction",
+          "description": "An observation does not fit the preferred theory.",
+          "guidingQuestions": [
+            "Which facts cannot be true at the same time?",
+            "Who recognizes the contradiction?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 38,
+          "suggestedPercentageEnd": 48,
+          "order": 2
+        },
+        {
+          "id": "central-reveal",
+          "title": "Central revelation",
+          "description": "A new truth orders traces and motifs differently.",
+          "guidingQuestions": [
+            "Which track takes on new meaning?",
+            "Which person does this bring into focus?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 48,
+          "suggestedPercentageEnd": 58,
+          "order": 3
+        },
+        {
+          "id": "setback",
+          "title": "Setback",
+          "description": "Evidence is lost, an error becomes apparent or the other side takes action.",
+          "guidingQuestions": [
+            "What is excluded from investigation?",
+            "What personal danger arises?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 58,
+          "suggestedPercentageEnd": 72,
+          "order": 4
+        }
+      ]
+    },
+    {
+      "id": "solution",
+      "title": "Truth and resolution",
+      "description": "The hidden connection is recognized, proven and processed.",
+      "order": 2,
+      "beats": [
+        {
+          "id": "hidden-connection",
+          "title": "Hidden connection",
+          "description": "Separate clues combine to form a viable solution.",
+          "guidingQuestions": [
+            "What pattern connects the tracks?",
+            "Why was it hidden?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 70,
+          "suggestedPercentageEnd": 82,
+          "order": 0
+        },
+        {
+          "id": "confrontation",
+          "title": "confrontation",
+          "description": "The truth discovered is put at risk against resistance.",
+          "guidingQuestions": [
+            "How is the solution proven?",
+            "What resistance can be expected?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 80,
+          "suggestedPercentageEnd": 92,
+          "order": 1
+        },
+        {
+          "id": "resolution",
+          "title": "resolution",
+          "description": "The course of the crime, motive and open wrong paths are clarified in a comprehensible manner.",
+          "guidingQuestions": [
+            "Are all crucial traces explained?",
+            "What misinterpretation is being corrected?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 90,
+          "suggestedPercentageEnd": 97,
+          "order": 2
+        },
+        {
+          "id": "aftermath",
+          "title": "Aftermath",
+          "description": "Consequences for investigators, those affected and order become visible.",
+          "guidingQuestions": [
+            "Who lives with what consequences?",
+            "Which order has been restored or lost?"
+          ],
+          "required": false,
+          "suggestedPercentageStart": 96,
+          "suggestedPercentageEnd": 100,
+          "order": 3
+        }
+      ]
+    }
+  ]
+}

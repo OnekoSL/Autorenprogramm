@@ -1,0 +1,194 @@
+{
+  "formatVersion": 1,
+  "id": "hero-journey",
+  "name": "Hero's journey",
+  "description": "Journey out of the familiar world through testing, transformation and return.",
+  "category": "plot",
+  "tags": [
+    "fantasy",
+    "adventure",
+    "coming of age"
+  ],
+  "acts": [
+    {
+      "id": "departure",
+      "title": "Departure",
+      "description": "The main character leaves his familiar order.",
+      "order": 0,
+      "beats": [
+        {
+          "id": "ordinary-world",
+          "title": "Familiar world",
+          "description": "Everyday life, lack and potential of the main character become visible.",
+          "guidingQuestions": [
+            "What binds them to this world?",
+            "What inner gap exists?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 0,
+          "suggestedPercentageEnd": 8,
+          "order": 0
+        },
+        {
+          "id": "call",
+          "title": "Call to adventure",
+          "description": "A task or threat demands change.",
+          "guidingQuestions": [
+            "Who or what is calling?",
+            "What is at stake in inaction?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 8,
+          "suggestedPercentageEnd": 12,
+          "order": 1
+        },
+        {
+          "id": "refusal",
+          "title": "refusal",
+          "description": "Fear, duty or doubt inhibit departure.",
+          "guidingQuestions": [
+            "Why does the character hesitate?",
+            "What makes the refusal untenable?"
+          ],
+          "required": false,
+          "suggestedPercentageStart": 10,
+          "suggestedPercentageEnd": 18,
+          "order": 2
+        },
+        {
+          "id": "mentor",
+          "title": "Meeting the mentor",
+          "description": "Help, knowledge or a tool pave the way.",
+          "guidingQuestions": [
+            "What help is given?",
+            "What does the character have to do himself?"
+          ],
+          "required": false,
+          "suggestedPercentageStart": 12,
+          "suggestedPercentageEnd": 22,
+          "order": 3
+        },
+        {
+          "id": "threshold",
+          "title": "Crossing the threshold",
+          "description": "The main character enters the unknown world of conflict.",
+          "guidingQuestions": [
+            "Which limit is being crossed?",
+            "Why is it difficult to return now?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 20,
+          "suggestedPercentageEnd": 28,
+          "order": 4
+        }
+      ]
+    },
+    {
+      "id": "initiation",
+      "title": "Trials and change",
+      "description": "Relationships, dangers and insights shape the main character.",
+      "order": 1,
+      "beats": [
+        {
+          "id": "tests",
+          "title": "Trials, allies and enemies",
+          "description": "The rules of the new world are learned through conflict.",
+          "guidingQuestions": [
+            "Who proves to be reliable?",
+            "What skill is still missing?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 25,
+          "suggestedPercentageEnd": 42,
+          "order": 0
+        },
+        {
+          "id": "approach",
+          "title": "Approaching the deepest cave",
+          "description": "The character prepares for the core conflict.",
+          "guidingQuestions": [
+            "What fear is she approaching?",
+            "What preparation is necessary?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 40,
+          "suggestedPercentageEnd": 50,
+          "order": 1
+        },
+        {
+          "id": "ordeal",
+          "title": "Crucial test",
+          "description": "An existential crisis requires change or sacrifice.",
+          "guidingQuestions": [
+            "What must symbolically die?",
+            "What truth is assumed?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 48,
+          "suggestedPercentageEnd": 60,
+          "order": 2
+        },
+        {
+          "id": "reward",
+          "title": "Reward",
+          "description": "After the test, knowledge, power or reconciliation is gained.",
+          "guidingQuestions": [
+            "What was really gained?",
+            "What danger is not yet over?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 58,
+          "suggestedPercentageEnd": 68,
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "return",
+      "title": "return",
+      "description": "The conversion must be confirmed in a final inspection.",
+      "order": 2,
+      "beats": [
+        {
+          "id": "road-back",
+          "title": "way back",
+          "description": "Consequences and enemies force the figure to return.",
+          "guidingQuestions": [
+            "What is haunting them?",
+            "Why does she have to return?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 65,
+          "suggestedPercentageEnd": 78,
+          "order": 0
+        },
+        {
+          "id": "resurrection",
+          "title": "resurrection",
+          "description": "The final test shows the transformation that has taken place.",
+          "guidingQuestions": [
+            "What old weakness will be overcome?",
+            "Who does the decision serve other than herself?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 78,
+          "suggestedPercentageEnd": 94,
+          "order": 1
+        },
+        {
+          "id": "elixir",
+          "title": "Return with the elixir",
+          "description": "The knowledge gained changes the initial world.",
+          "guidingQuestions": [
+            "What does the character bring back?",
+            "How does the community benefit?"
+          ],
+          "required": true,
+          "suggestedPercentageStart": 94,
+          "suggestedPercentageEnd": 100,
+          "order": 2
+        }
+      ]
+    }
+  ]
+}
