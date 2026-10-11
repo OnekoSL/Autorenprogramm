@@ -6,6 +6,34 @@ Autorenprogramm ist eine lokale Windows-Desktop-App für komplexe Romanprojekte.
 
 > **Frühe Testversion:** Version 0.2.0 ist ein unsigniertes Pre-release für freiwillige Tests. Verwende Kopien oder Testprojekte und sichere wichtige Projektdateien regelmäßig.
 
+## Einblicke in das Programm
+
+Die Screenshots zeigen die Oberfläche von Version 0.2.0 mit dem fiktiven Beispielprojekt „Das Geheimnis der Karten“.
+
+### Manuskript schreiben
+
+Bereiche, Kapitel und Szenen links im Navigator, der Text in der Mitte und Szenenkontext sowie Story-Beats rechts.
+
+![Manuskript mit Kapitel- und Szenennavigator, Texteditor und Szenenkontext](doc/screenshots/writing-de.png)
+
+### Handlung planen
+
+Strukturvorlagen gliedern die Handlung in Akte und Beats. Eigene Zusammenfassungen, Status und verknüpfte Szenen halten die Planung mit dem Manuskript zusammen.
+
+![Dreiaktstruktur mit Story-Beats, Bearbeitungsstatus und verknüpfter Szene](doc/screenshots/structure-de.png)
+
+### Figuren und Beziehungen organisieren
+
+Die Projektbibel sammelt Figuren, Orte, Gegenstände, Notizen, Fraktionen und Ereignisse. Karten lassen sich mit Szenen, anderen Karten und Weltsystemen verknüpfen.
+
+![Figurenkarte mit Beschreibung, Notizen, Szenenverknüpfungen und Beziehungen](doc/screenshots/bible-de.png)
+
+### Die Welt ausarbeiten
+
+Weltsysteme beschreiben etwa Magie oder Technologie mit Grundprinzipien, Regeln, Möglichkeiten und Grenzen. Vorlagen und Leitfragen unterstützen die Ausarbeitung.
+
+![Worldbuilding mit ausgefülltem Magiesystem und Leitfragen](doc/screenshots/worldbuilding-de.png)
+
 ## Enthaltene Funktionen
 
 - Lokale `.autorenprojekt`-Dateien mit unveränderlicher Projektsprache Deutsch oder britisches Englisch
