@@ -6,6 +6,34 @@ Autorenprogramm is a local Windows desktop application for complex novel project
 
 > **Early test build:** Version 0.2.0 is an unsigned pre-release for voluntary testing. Use copies or disposable projects and back up important project files regularly.
 
+## A look inside the application
+
+These screenshots show the version 0.2.0 interface with the fictional example project “The Secret of the Maps”.
+
+### Write the manuscript
+
+Browse parts, chapters and scenes in the navigator on the left, write in the centre and keep scene context and story beats alongside the text.
+
+![Manuscript with chapter and scene navigator, text editor and scene context](doc/screenshots/writing-en.png)
+
+### Plan the story
+
+Structure templates organise the plot into acts and beats. Your own summaries, progress statuses and linked scenes connect the plan to the manuscript.
+
+![Three-act structure with story beats, progress statuses and a linked scene](doc/screenshots/structure-en.png)
+
+### Organise characters and relationships
+
+The project bible collects characters, locations, items, notes, factions and events. Cards can link to scenes, other cards and world systems.
+
+![Character card with description, notes, scene links and relationships](doc/screenshots/bible-en.png)
+
+### Develop the world
+
+World systems describe subjects such as magic or technology through principles, rules, capabilities and limits. Templates and guiding questions support their development.
+
+![Worldbuilding with a populated magic system and guiding questions](doc/screenshots/worldbuilding-en.png)
+
 ## Included features
 
 - Local `.autorenprojekt` files with an immutable project language: German or British English
